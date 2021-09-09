@@ -1,0 +1,12 @@
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.deps.json
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.csprojAssemblyReference.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.AssemblyInfoInputs.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.AssemblyInfo.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.csproj.CopyComplete
+F:\dotnet\AutomotiveSols\AutomotiveSols.Static\obj\Debug\netcoreapp3.1\AutomotiveSols.Static.csproj.CoreCompileInputs.cache

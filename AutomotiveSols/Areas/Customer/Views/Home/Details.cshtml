@@ -1,0 +1,72 @@
+﻿@model AutomotiveSols.BLL.Models.Services
+@using Microsoft.AspNetCore.Http
+@using AutomotiveSols.Extensions
+@inject IHttpContextAccessor HttpContextAccessor
+
+<br />
+<h2 class="text-info">Service Details</h2>
+
+<form method="post">
+    <div class="p-4 border rounded row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="ServiceType"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ServiceType.Name" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    @{ bool isInBag = false;
+                        List<int> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("tempCart");
+                        if (lstCart != null && lstCart.Contains(Model.Id))
+                        {
+                            isInBag = true;
+
+                        } }
+
+                    @if (isInBag)
+                    {
+        <button type="submit" value="Remove From Bag" asp-action="remove" asp-route-id="@Model.Id" class="btn btn-danger form-control">Remove From Bag</button> }
+    else
+    {
+<button type="submit" value="Add to Bag" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add To Bag</button>}
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.ImageUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9;" />
+            <br /><br />
+
+            <br />
+            <div class="form-group">
+                <input hidden asp-for="Id" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+</form>
+

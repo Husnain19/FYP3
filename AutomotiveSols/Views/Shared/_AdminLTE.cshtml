@@ -1,0 +1,319 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Starter</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="index3.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    @*If the user is signed-in display Logout link*@
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-area="Admin" asp-controller="Account" asp-action="Logout">
+                                <button type="submit" style="width:auto"
+                                        class="nav-link btn btn-link py-0">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Account" asp-action="Register">
+                                Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Account" asp-action="Login">
+                                Login
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- SEARCH FORM -->
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="index3.html" class="brand-link">
+
+                <span class="brand-text font-weight-light">Automotive Solutions </span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
+
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" 
+                        role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-car-side"></i>
+                                <p>
+                                    Cars
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Brand" asp-action="Index"
+                                       class="nav-link ">
+                                        <i class="fas fa-file-signature nav-icon"></i>
+                                        <p>Brand</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Feature" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-atom nav-icon"></i>
+                                        <p>Features</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Mileage" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-tachometer-alt nav-icon"></i>
+                                        <p>Mileage</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Model" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-sort-numeric-down nav-icon"></i>                                        <p>Model</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Transmission" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-monument nav-icon"></i>
+
+                                        <p>Transmission</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Trim" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-signature nav-icon"></i>
+                                        <p>Trim</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Year" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-calendar-week nav-icon"></i>
+                                        <p>Year</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Car" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-car-alt nav-icon"></i>
+                                        <p>Cars</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <!---Workshop Services-->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-cog"></i>                            
+                                <p>
+                                    Workshop 
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="ServiceType" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-users-cog nav-icon"></i>                               
+                                        <p>Service Types</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Service" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-atom nav-icon"></i>
+                                        <p>Services</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Appointment" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-tags nav-icon"></i>
+                                        <p>Appointments</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!---spare parts-->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-cog"></i>                                 <p>
+                                    Spare Parts
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-users-cog nav-icon"></i>                                        <p>Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="SubCategory" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-atom nav-icon"></i>
+                                        <p>Sub Category</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Coupon" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-tags nav-icon"></i>                                        <p>Coupons</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="AutoPart" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-store-alt nav-icon"></i>                                        <p>Parts</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-store-alt nav-icon"></i>       
+                                        <p>Orders</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!--Account-->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-users"></i>
+                                Account
+                                <i class="right fas fa-angle-left"></i>
+
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="ListUsers" class="nav-link ">
+                                        <i class="fas fa-users-cog nav-icon"></i>
+                                        <p>List of Users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="ListRoles" class="nav-link ">
+                                        <i class="fas fa-atom nav-icon"></i>
+                                        <p>List of Roles</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="Register" class="nav-link ">
+                                        <i class="fas fa-tags nav-icon"></i>
+                                        <p>Add New User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Account" asp-action="CreateRole" class="nav-link ">
+                                        <i class="fas fa-store-alt nav-icon"></i>
+                                        <p>Add New Role</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+</nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="float-right d-none d-sm-inline">
+                Anything you want
+            </div>
+            <!-- Default to the left -->
+
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/FFE57928-2D2C-45F6-AB6D-E9F16DE5DF2C.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

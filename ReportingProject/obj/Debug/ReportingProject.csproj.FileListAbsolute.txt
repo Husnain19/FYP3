@@ -1,0 +1,6 @@
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\ReportingProject.csprojAssemblyReference.cache
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\ReportingProject.Properties.Resources.resources
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\ReportingProject.csproj.GenerateResource.cache
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\RdlCompile.cache
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\RdlCompile.compiled
+F:\dotnet\AutomotiveSols\ReportingProject\obj\Debug\ReportingProject.csproj.CoreCompileInputs.cache

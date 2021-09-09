@@ -1,0 +1,14 @@
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csprojAssemblyReference.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.AssemblyInfoInputs.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.AssemblyInfo.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.DAL.deps.json
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.DAL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.DAL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csproj.CoreCompileInputs.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csproj.CopyComplete
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.pdb

@@ -1,0 +1,120 @@
+﻿@model AutomotiveSols.BLL.Models.Car
+@using Microsoft.AspNetCore.Http
+@using AutomotiveSols.Extensions
+@inject IHttpContextAccessor HttpContextAccessor
+
+<br />
+<h2 class="text-info">Car Details</h2>
+
+<form method="post">
+    <div class="p-4 border rounded row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Brand.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Brand.Name" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Trim.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Trim.Name" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Transmission.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Transmission.Name" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Model.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Model.Name" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Mileage.NumberKm"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Mileage.NumberKm" class="form-control" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="RegistrationCity.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="RegistrationCity.Name" class="form-control" readonly />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Year.SolarYear"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Year.SolarYear" class="form-control" readonly />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+
+                <div class="col-4">
+                </div>
+                <div class="col-8">
+                    @{ bool isInBag = false;
+                        List<int> lstCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("carCart");
+                        if (lstCart != null && lstCart.Contains(Model.Id))
+                        {
+                            isInBag = true;
+
+                        } }
+
+                    @if (isInBag)
+                    {
+        <button type="submit" value="Remove From Bag" asp-action="RemoveCar" asp-route-id="@Model.Id" class="btn btn-danger form-control">Remove From Bag</button> }
+    else
+    {
+        <button type="submit" value="Add to Bag" asp-route-id="@Model.Id" class="btn btn-primary form-control">Add To Bag</button>}
+                </div>
+            </div>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-3">
+            <img src="@Model.MainImage" width="100%" style="border-radius:5px; border:1px solid #bbb9b9;" />
+            <br /><br />
+
+            <br />
+            <div class="form-group">
+                <input hidden asp-for="Id" />
+                <a asp-action="Index" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+</form>
+

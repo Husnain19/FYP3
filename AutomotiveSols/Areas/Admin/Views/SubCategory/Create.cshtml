@@ -1,0 +1,50 @@
+﻿@model AutomotiveSols.BLL.Models.SubCategory
+@{
+    var title = "Create Sub-Category";
+}
+
+<form method="post" asp-action="Create">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+       
+        <div class="col-12">
+            <h2 class="text-primary">@title</h2>
+            <br />
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    Category
+                </div>
+                <div class="col-8">
+
+                    <label class="control-label"> Category </label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryList">
+                        <option value="">Please choose your Type of Service</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</form>

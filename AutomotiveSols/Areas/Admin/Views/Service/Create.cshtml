@@ -1,0 +1,71 @@
+﻿@model AutomotiveSols.BLL.ViewModels.ServiceVM
+
+@{ ViewData["Title"] = "Create Service"; }
+
+<br />
+<h2 class="text-info">Create Service</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Services.Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Services.Name" class="form-control" />
+            </div>
+            <span asp-validation-for="Services.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Services.Price"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Services.Price" class="form-control" />
+            </div>
+            <span asp-validation-for="Services.Price" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Services.ImageUrl"></label>
+            </div>
+            <div class="col-5">
+                <input type="file" name="files" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Services.Description"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Services.Description" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Services.SellerComments"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Services.SellerComments" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Service Type</label>
+            <select asp-for="Services.ServiceTypeId" class="form-control" asp-items="ViewBag.ServiceTypes">
+                <option value="">Please choose your Type of Service</option>
+            </select>
+            <span asp-validation-for="Services.ServiceTypeId" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Create" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

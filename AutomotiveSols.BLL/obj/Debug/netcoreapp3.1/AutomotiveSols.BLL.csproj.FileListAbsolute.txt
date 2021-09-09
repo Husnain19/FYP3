@@ -1,0 +1,9 @@
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.deps.json
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.AssemblyInfoInputs.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.AssemblyInfo.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.dll
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.csproj.CoreCompileInputs.cache
+F:\dotnet\AutomotiveSols\AutomotiveSols.BLL\obj\Debug\netcoreapp3.1\AutomotiveSols.BLL.csprojAssemblyReference.cache

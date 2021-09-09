@@ -1,0 +1,239 @@
+﻿@using Microsoft.AspNetCore.Http
+@using AutomotiveSols.Extensions
+@using AutomotiveSols.Static
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AutomotiveSols</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-slate.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/jquery-ui.css" />
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+
+                        <li>
+                            <a style="color:azure" ; class="dropdown-item" asp-area="Customer"
+                               asp-controller="Home"
+                               asp-action="Index">
+                                Automotive Services Spare Parts Solutions
+                            </a>
+                        </li>
+                        @*@if (User.IsInRole(StaticDetails.Role_Admin))
+                                {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage AutoParts
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Category"
+                                       asp-action="Index">Category</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="SubCategory"
+                                       asp-action="Index">SubCategory</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AutoPart"
+                                       asp-action="Index">Spare Parts</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Coupon"
+                                       asp-action="Index">Coupon</a>
+
+                                </div>
+                            </li>}
+                                @if (User.IsInRole(StaticDetails.Role_Admin))
+                                {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Workshop
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ServiceType"
+                                       asp-action="Index">Service Types</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Service"
+                                       asp-action="Index">Services</a>
+                                </div>
+                            </li>
+        }
+                                @if (User.IsInRole(StaticDetails.Role_Admin))
+                                {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Cars
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Car"
+                                       asp-action="Index">Cars</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Brand"
+                                       asp-action="Index">Brand</a>
+
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Feature"
+                                       asp-action="Index">Features</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Mileage"
+                                       asp-action="Index">Mileage</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Model"
+                                       asp-action="Index">Model</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="RegistrationCities"
+                                       asp-action="Index">City</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Transmission"
+                                       asp-action="Index">Transmission</a>
+
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Trim"
+                                       asp-action="Index">Trim</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Year"
+                                       asp-action="Index">Year</a>
+
+
+
+                                </div>
+                            </li>}
+                                @if (User.IsInRole(StaticDetails.Role_Admin))
+                                {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Manage Users/Roles
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Account"
+                                       asp-action="ListUsers">Users</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Account"
+                                       asp-action="ListRoles">Roles</a>
+                                </div>
+                            </li>
+                                }*@
+
+                        @if (User.IsInRole(StaticDetails.Role_Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Account"
+                                   asp-action="ListUsers">
+                                    Admin Site
+                                </a>
+                            </li>
+                        }
+
+                        @*@if (User.IsInRole("Admin") || User.IsInRole("Vendor"))
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">
+                            Orders
+
+                        </a>
+                    </li>}*@
+
+                        @if (HttpContextAccessor.HttpContext.Session.GetInt32(StaticDetails.ssShoppingCart) != null)
+                        {
+                    <li style="color:white;">
+                        <a asp-area="Customer" asp-controller="Cart" asp-action="Index" class="nav-link">
+                            @{ var count = HttpContextAccessor.HttpContext.Session.GetInt32(StaticDetails.ssShoppingCart); }
+                            <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                        </a>
+                    </li>
+                    }
+                else
+                {
+                    <li style="color:white;">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                        </a>
+                    </li>
+}
+                        @*@if (User.IsInRole("Admin") || User.IsInRole("Workshop"))
+                        {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" 
+                           asp-controller="Appointment" asp-action="Index">Appointments
+                        </a>
+                        </li>
+                        }*@
+
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("tempCart") != null)
+                        {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="TempCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                            @{ var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("tempCart").Count; }
+                            (@count)
+                        </a>
+
+
+                    </li>
+ }
+                else
+                {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="TempCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;(0)
+                        </a>
+
+                    </li>}
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("carCart") != null)
+                        {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="CarCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                            @{ var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("carCart").Count; }
+                            (@count)
+                        </a>
+                    </li>
+ }
+                                else
+                                {
+                    <li style="color:white">
+                        <a asp-area="Customer" asp-controller="CarCart" asp-action="Index"
+                           class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;(0)
+
+
+                        </a>
+
+                    </li>
+}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - AutomotiveSols - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery-ui.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.timepicker.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

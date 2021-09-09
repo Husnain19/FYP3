@@ -1,0 +1,115 @@
+﻿
+
+
+@model AutomotiveSols.BLL.ViewModels.AutoPartViewModel
+@{
+    ViewData["Title"] = "Add new AutoPart";
+}
+<div class="container">
+    <h3 class="display-4">Add new Spare-Part</h3>
+    <hr />
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You have added new book successfully. <br />
+            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.PartId">here</a> to view the details
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+<form method="post" enctype="multipart/form-data" asp-action="AddNewPart" asp-controller="AutoPart" asp-area="Admin">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-4">
+            Category
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Category </label>
+            <select asp-for="autoPart.CategoryId" class="form-control" asp-items="ViewBag.CategoryList">
+                <option value="">Please choose your Category</option>
+            </select>
+            <span asp-validation-for="autoPart.CategoryId" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Sub Category
+        </div>
+        <div class="col-8">
+
+            <label class="control-label">Sub Category </label>
+            <select asp-for="autoPart.SubCategoryId" class="form-control" asp-items="ViewBag.SubCategoryList">
+                <option value="">Please choose your Sub Category</option>
+            </select>
+            <span asp-validation-for="autoPart.SubCategoryId" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="autoPart.Name" class="control-label"></label>
+        <input asp-for="autoPart.Name" class="form-control" />
+        <span asp-validation-for="autoPart.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="autoPart.ListPrice" class="control-label"></label>
+        <input asp-for="autoPart.ListPrice" class="form-control" />
+        <span asp-validation-for="autoPart.ListPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="autoPart.Price" class="control-label"></label>
+        <textarea asp-for="autoPart.Price" class="form-control"></textarea>
+        <span asp-validation-for="autoPart.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="autoPart.Price50" class="control-label"></label>
+        <input asp-for="autoPart.Price50" class="form-control" />
+        <span asp-validation-for="autoPart.Price50" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="autoPart.Price100" class="control-label"></label>
+        <input asp-for="autoPart.Price100" class="form-control" />
+        <span asp-validation-for="autoPart.Price100" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CoverPhoto" class="control-label"></label>
+        <div class="custom-file">
+            <div class="col-5">
+                <input type="file" name="files" class="form-control" />
+            </div>
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GalleryFiles" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="autoPart.Description" class="control-label"></label>
+        <input asp-for="autoPart.Description" class="form-control" />
+        <span asp-validation-for="autoPart.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="autoPart.SellerComments" class="control-label"></label>
+        <input asp-for="autoPart.SellerComments" class="form-control" />
+        <span asp-validation-for="autoPart.SellerComments" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+</form>
+</div>
