@@ -80,17 +80,28 @@ namespace AutomotiveSols.Data
             builder.Entity<Transmission>().HasKey(k => k.Id);
             builder.Entity<Transmission>().Property(k => k.Name).IsRequired();
 
+            //builder.Entity<Transmission>().HasOne(k => k.Trim)
+            //    .WithMany(k => k.Transmissions).HasForeignKey(k => k.TrimId);
+
             builder.Entity<Trim>().HasKey(k => k.Id);
             builder.Entity<Trim>().Property(k => k.Name).IsRequired();
 
+            builder.Entity<Trim>().HasOne(k => k.Model)
+                .WithMany(k => k.Trims).HasForeignKey(k => k.ModelId);
             builder.Entity<Year>().HasKey(k => k.Id);
             builder.Entity<Year>().Property(k => k.SolarYear).IsRequired();
+
+            //builder.Entity<Year>().HasOne(k => k.Trim)
+            //    .WithMany(k => k.Years).HasForeignKey(k => k.TrimId);
 
             builder.Entity<RegistrationCity>().HasKey(k => k.Id);
             builder.Entity<RegistrationCity>().Property(k => k.Name).IsRequired();
 
             builder.Entity<Model>().HasKey(k => k.Id);
             builder.Entity<Model>().Property(k => k.Name).IsRequired();
+
+            builder.Entity<Model>().HasOne(k => k.Brand)
+                .WithMany(k => k.Models).HasForeignKey(k => k.BrandId);
 
             builder.Entity<Mileage>().HasKey(k => k.Id);
             builder.Entity<Mileage>().Property(k => k.NumberKm).IsRequired();

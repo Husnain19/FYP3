@@ -23,7 +23,19 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Trim
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Trims.ToListAsync());
+            return View(await _context.Trims.Include(x=>x.Model).ToListAsync());
+        }
+
+
+        [ActionName("GetTrims")]
+        public async Task<IActionResult> GetTrims(int id)
+        {
+            List<Trim> trims = new List<Trim>();
+
+            trims = await (from trim in _context.Trims
+                            where trim.ModelId == id
+                            select trim).ToListAsync();
+            return Json(new SelectList(trims, "Id", "Name"));
         }
 
         // GET: Admin/Trim/Details/5
@@ -47,6 +59,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Trim/Create
         public IActionResult Create()
         {
+            ViewBag.ModelList = new SelectList(_context.Models.ToList(), "Id", "Name");
             return View();
         }
 
@@ -55,8 +68,10 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Trim trim)
+        public async Task<IActionResult> Create(Trim trim)
         {
+            ViewBag.ModelList = new SelectList(_context.Models.ToList(), "Id", "Name");
+
             if (ModelState.IsValid)
             {
                 _context.Add(trim);
@@ -69,6 +84,8 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Trim/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.ModelList = new SelectList(_context.Models.ToList(), "Id", "Name");
+
             if (id == null)
             {
                 return NotFound();
@@ -87,7 +104,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Trim trim)
+        public async Task<IActionResult> Edit(int id, Trim trim)
         {
             if (id != trim.Id)
             {

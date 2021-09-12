@@ -26,6 +26,8 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             return View(await _context.Transmissions.ToListAsync());
         }
 
+      
+
         // GET: Admin/Transmission/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -47,6 +49,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Transmission/Create
         public IActionResult Create()
         {
+            ViewBag.ModelList = new SelectList(_context.Trims.ToList(), "Id", "Name");
             return View();
         }
 

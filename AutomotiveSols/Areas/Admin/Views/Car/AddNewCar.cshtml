@@ -26,7 +26,7 @@
         <div class="col-8">
 
             <label class="control-label"> Brand </label>
-            <select asp-for="Car.BranId" class="form-control" asp-items="ViewBag.BrandList">
+            <select asp-for="Car.BranId" class="form-control" id="BrandId" asp-items="ViewBag.BrandList">
                 <option value="">Please choose your Brand</option>
             </select>
             <span asp-validation-for="Car.Brand" class="text-danger"></span>
@@ -35,15 +35,30 @@
     </div>
     <div class="form-group row">
         <div class="col-4">
-            Brand
+            Model
         </div>
         <div class="col-8">
 
             <label class="control-label"> Model </label>
-            <select asp-for="Car.ModelId" class="form-control" asp-items="ViewBag.ModelList">
+            <select asp-for="Car.ModelId" class="form-control ModelId2" id="ModelId"  asp-items="ViewBag.ModelList">
                 <option value="">Please choose your Model</option>
             </select>
             <span asp-validation-for="Car.Model" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-4">
+            Trim
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Trim </label>
+            <select asp-for="Car.TrimId" class="form-control" id="TrimId" asp-items="ViewBag.TrimList">
+                <option value="">Please choose your Trim</option>
+            </select>
+            <span asp-validation-for="Car.Trim" class="text-danger"></span>
 
         </div>
     </div>
@@ -92,20 +107,6 @@
 
     <div class="form-group row">
         <div class="col-4">
-            Trim
-        </div>
-        <div class="col-8">
-
-            <label class="control-label"> Trim </label>
-            <select asp-for="Car.TrimId" class="form-control" asp-items="ViewBag.TrimList">
-                <option value="">Please choose your Trim</option>
-            </select>
-            <span asp-validation-for="Car.Trim" class="text-danger"></span>
-
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-4">
             Year
         </div>
         <div class="col-8">
@@ -151,13 +152,6 @@
             @Html.CheckBoxFor(x => @Model.FeatureAssignedToCar[i].Assigned)
             <label class="form-check-label">@Model.FeatureAssignedToCar[i].FeatureName</label><br />
         }
-        @*@foreach (var course in Model.AssignedCourseData)
-            {
-                <input type="hidden" asp-for="@course.CourseId" />
-                <input type="checkbox" asp-for="@course.Assigned" value="@course.Assigned" />
-                <label class="text text-capitalize">@course.CourseName</label><br />
-
-            }*@
 
     </div>
 
@@ -166,3 +160,54 @@
     </div>
 </form>
 </div>
+
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            getModels();
+            //getTrims();
+            $('#BrandId').change(function () {
+                getModels();
+            });
+            //$('.ModelId2').change(function () {
+            //    getTrims();
+            //});
+        });
+
+
+        function getModels() {
+            var url = '@Url.Content("~/")' + "Admin/Model/GetModels";
+            var ddlsoruce = '#BrandId';
+            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
+                var items = '';
+                $('#ModelId').empty();
+                $.each(data, function (i, model) {
+                    items += "<option value='" + model.value + "'>" + model.text + "</option>";
+                });
+
+                $('#ModelId').html(items);
+            })
+        }
+
+            @*function getTrims() {
+            var url = '@Url.Content("~/")' + "Admin/Trim/GetTrims";
+            var ddlsoruce = '.ModelId2';
+            $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {
+                var items = '';
+                $('#TrimId').empty();
+                $.each(data, function (i, trim) {
+                    items += "<option value='" + trim.value + "'>" + trim.text + "</option>";
+                });
+
+                $('#TrimId').html(items);
+            })
+        }*@
+
+    </script>
+
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

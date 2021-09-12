@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 
 namespace AutomotiveSols.BLL.Models
 {
@@ -8,7 +7,8 @@ namespace AutomotiveSols.BLL.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        
+        public List<Trim> Trims { get; set; }
         public List<Car> Cars { get; set; }
 
     }

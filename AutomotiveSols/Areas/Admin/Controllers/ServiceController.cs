@@ -33,7 +33,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             _hostEnvironment = hostingEnvironment;
             _userManager = userManager;
 
-         }
+        }
         public async Task<IActionResult> Index()
         {
             var services = _db.Services.Include(s => s.ServiceType);

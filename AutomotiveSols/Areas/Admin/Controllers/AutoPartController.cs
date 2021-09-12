@@ -215,6 +215,8 @@ namespace AutomotiveSols.Areas.Admin.Controllers
 
         //}
 
+
+
         public IActionResult AddNewPart(bool isSuccess = false, int partId = 0)
         {
             ViewBag.CategoryList = new SelectList(_db.Categories.ToList(), "Id", "Name");

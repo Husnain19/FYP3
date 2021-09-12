@@ -355,11 +355,16 @@ namespace AutomotiveSols.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
 
                     b.ToTable("Models");
                 });
@@ -670,11 +675,26 @@ namespace AutomotiveSols.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TransmissionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("YearId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ModelId");
+
+                    b.HasIndex("TransmissionId");
+
+                    b.HasIndex("YearId");
 
                     b.ToTable("Trims");
                 });
@@ -1037,6 +1057,15 @@ namespace AutomotiveSols.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.Model", b =>
+                {
+                    b.HasOne("AutomotiveSols.BLL.Models.Brand", "Brand")
+                        .WithMany("Models")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("AutomotiveSols.BLL.Models.OrderDetails", b =>
                 {
                     b.HasOne("AutomotiveSols.BLL.Models.AutoPart", "AutoPart")
@@ -1119,6 +1148,25 @@ namespace AutomotiveSols.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.Trim", b =>
+                {
+                    b.HasOne("AutomotiveSols.BLL.Models.Model", "Model")
+                        .WithMany("Trims")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutomotiveSols.BLL.Models.Transmission", null)
+                        .WithMany("Trims")
+                        .HasForeignKey("TransmissionId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("AutomotiveSols.BLL.Models.Year", null)
+                        .WithMany("Trims")
+                        .HasForeignKey("YearId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

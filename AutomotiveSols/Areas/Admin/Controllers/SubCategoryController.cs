@@ -81,6 +81,18 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             return View(subcategory);
         }
 
+        [ActionName("GetSubCategory")]
+        public async Task<IActionResult> GetSubCategory(int id)
+        {
+            List<SubCategory> subCategories = new List<SubCategory>();
+
+            subCategories = await (from subCategory in _db.SubCategories
+                                   where subCategory.CategoryId == id
+                                   select subCategory).ToListAsync();
+            return Json(new SelectList(subCategories, "Id", "Name"));
+        }
+
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

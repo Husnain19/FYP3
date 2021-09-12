@@ -5,38 +5,34 @@
 
 @if (Model.Count() > 0)
 {
-<div class="col-12 post @Model.FirstOrDefault().ServiceType.Name.Replace(" ",string.Empty) menu-restaurant">
+<div class="col-12 post @Model.FirstOrDefault().ServiceType.Name.Replace(" ", string.Empty) menu-restaurant">
     <div class="row">
         <h3 class="text-success"> @Model.FirstOrDefault().ServiceType.Name </h3>
-    </div>
-
+    
     @foreach (var item in Model)
     {
-<div class="border border-info rounded col-12" style="margin-bottom:10px; margin-top:10px; padding:10px">
-    <div class="row">
-        <div class="col-md-3 col-sm-12">
-            <img src="@item.ImageUrl" width="99%" style="border-radius:5px;border:1px solid #bbb9b9" />
-        </div>
-        <div class="col-md-9 col-sm-12">
-            <div class="row pr-3">
-                <div class="col-8">
-                    <label class="text-primary" style="font-size:21px;color:maroon">@item.Name</label>
-                    
+        <div class="col-lg-4 col-xl-3 col-md-6 pb-4">
+            <div class="card" style="border:2px solid black;border-radius:5px; background:url('/images/leaves.png')">
+                <div class="pl-3 pt-1 text-center">
+                    <h3 class="card-title text-dark"><b>@item.Name</b></h3>
                 </div>
-                <div class="col-4 text-right" style="color:maroon">
-                    <h4>$@item.Price</h4>
+                <div class="d-flex justify-content-between ">
+                    <div class="pl-1 text-muted">Price </div>
+                    <div class="pr-1 text-danger h5">$@item.Price</div>
                 </div>
-            </div>
+                <img src="@item.ImageUrl" class="card-img-top p-2 rounded" />
 
+                <div class="text-muted text-center pb-2">@item.ServiceType.Name</div>
+                <div class="text-muted text-center pb-2">@item.ApplicationUser.Name</div>
 
-            <div class="row col-12 text-justify d-none d-md-block">
-                <p>@Html.Raw(item.Description)</p>
-            </div>
-            <div class="col-md-3 col-sm-12 offset-md-9 text-center">
-                <a asp-action="Details" class="btn btn-success form-control" asp-route-id="@item.Id">Details</a>
+                <a asp-action="DetailsPart" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@item.Id">Details</a>
             </div>
         </div>
+
+    }
+       
+</div>
     </div>
-</div>}
-    <div class="p-4"></div>
-</div>}
+}
+
+

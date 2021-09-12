@@ -584,3 +584,4 @@ F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\AutomotiveSols.c
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\AutomotiveSols.MvcApplicationPartsAssemblyInfo.cs
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\AutomotiveSols.MvcApplicationPartsAssemblyInfo.cache
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ThumbnailAreaPartial.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ThumbnailAreaPartialParts.cshtml.g.cs

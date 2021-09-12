@@ -23,8 +23,21 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Model
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Models.ToListAsync());
+            return View(await _context.Models.Include(x=>x.Brand).ToListAsync());
         }
+
+         [ActionName("GetModels")]
+        public async Task<IActionResult> GetModels(int id)
+        {
+            List<Model> models = new List<Model>();
+
+            models = await (from model in _context.Models
+                                   where model.BrandId== id
+                                   select model).ToListAsync();
+            return Json(new SelectList(models, "Id", "Name"));
+        }
+
+       
 
         // GET: Admin/Model/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -47,6 +60,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Model/Create
         public IActionResult Create()
         {
+            ViewBag.BrandList = new SelectList(_context.Brands.ToList(), "Id", "Name");
             return View();
         }
 
@@ -55,8 +69,10 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Model model)
+        public async Task<IActionResult> Create(Model model)
         {
+            ViewBag.BrandList = new SelectList(_context.Brands.ToList(), "Id", "Name");
+
             if (ModelState.IsValid)
             {
                 _context.Add(model);
@@ -69,6 +85,8 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // GET: Admin/Model/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewBag.BrandList = new SelectList(_context.Brands.ToList(), "Id", "Name");
+
             if (id == null)
             {
                 return NotFound();
@@ -87,7 +105,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Model model)
+        public async Task<IActionResult> Edit(int id, Model model)
         {
             if (id != model.Id)
             {

@@ -1,104 +1,343 @@
 ﻿@model AutomotiveSols.BLL.ViewModels.IndexViewModel
+<!-- Button trigger modal -->
+<!------------------------------------------------------->
 
-<br />
-<br />
-<form method="get" asp-controller="Home" asp-action="Index">
-    <p>
-        <input type="search" placeholder="Search Cars, Services and Spare Parts..." value="@ViewData["searchString"]"
-               name="searchString" style="width:500px;" />
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </p>
-</form>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Post
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+        </button>
+        <br />
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+            Launch demo modal
+        </button>
+    </div>
+</div>
 
-<br />
-<br />
-<!---------------------------------------------------------------------------->
-<div class="backgroundWhite container">
+<!----------------------------------------------modal1-->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------------------------------->
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!------------------------------------------------------------------------------------>
 
-    <ul id="menu-filters" class="menu-filter-list list-inline text-center">
-        <li class="active btn btn-secondary ml-1 mr-1" data-filter=".menu-restaurant">Show All</li>
 
-        @foreach (var item in Model.ServiceTypes)
-        {
-<li class="ml-1 mr-1" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>
-}
-    </ul>
+                <form method="post" enctype="multipart/form-data" asp-action="AddNewCar" asp-controller="Car" asp-area="Admin">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Brand
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Brand </label>
+                            <select asp-for="Car.BranId" class="form-control" id="BrandId" asp-items="ViewBag.BrandList">
+                                <option value="">Please choose your Brand</option>
+                            </select>
+                            <span asp-validation-for="Car.Brand" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Model
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Model </label>
+                            <select asp-for="Car.ModelId" class="form-control ModelId2" id="ModelId" asp-items="ViewBag.ModelList">
+                                <option value="">Please choose your Model</option>
+                            </select>
+                            <span asp-validation-for="Car.Model" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Trim
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Trim </label>
+                            <select asp-for="Car.TrimId" class="form-control" id="TrimId" asp-items="ViewBag.TrimList">
+                                <option value="">Please choose your Trim</option>
+                            </select>
+                            <span asp-validation-for="Car.Trim" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Mileage
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Mileage </label>
+                            <select asp-for="Car.MileageId" class="form-control" asp-items="ViewBag.MileageList">
+                                <option value="">Please choose your Mileage</option>
+                            </select>
+                            <span asp-validation-for="Car.Mileage" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Registration City
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Registration City </label>
+                            <select asp-for="Car.RegistrationCityId" class="form-control" asp-items="ViewBag.RegistrationCityList">
+                                <option value="">Please choose your Registration City</option>
+                            </select>
+                            <span asp-validation-for="Car.RegistrationCity" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Transmission
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Transmission </label>
+                            <select asp-for="Car.TransmissionId" class="form-control" asp-items="ViewBag.TransmissionList">
+                                <option value="">Please choose your Transmission</option>
+                            </select>
+                            <span asp-validation-for="Car.Transmission" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            Year
+                        </div>
+                        <div class="col-8">
+
+                            <label class="control-label"> Year </label>
+                            <select asp-for="Car.YearId" class="form-control" asp-items="ViewBag.YearList">
+                                <option value="">Please choose your Year</option>
+                            </select>
+                            <span asp-validation-for="Car.Year" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Car.Price" class="control-label"></label>
+                        <input asp-for="Car.Price" class="form-control" />
+                        <span asp-validation-for="Car.Price" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CoverPhoto" class="control-label"></label>
+                        <div class="custom-file">
+                            <div class="col-5">
+                                <input type="file" name="files" class="form-control" />
+                            </div>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GalleryFiles" class="control-label"></label>
+                        <div class="custom-file">
+                            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        @for (int i = 0; i < @Model.FeatureAssignedToCar.Count; i++)
+                        {
+            @Html.HiddenFor(m => @Model.FeatureAssignedToCar[i].FeatureId)
+                            @Html.CheckBoxFor(x => @Model.FeatureAssignedToCar[i].Assigned)
+                                            <label class="form-check-label">@Model.FeatureAssignedToCar[i].FeatureName</label><br />}
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Add" class="btn btn-primary" />
+                    </div>
+                </form>
 
 
-    @foreach (var category in Model.ServiceTypes)
-    {
+                <!------------------------------------------------------------------------------------>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--------------------------------------------------------------------------------------------------->
+<div style="position:relative">
+    <div style="position:relative;left:46%; top:10% ">
+        <form method="get" asp-controller="Home" asp-action="Index" class="example">
+
+            <input type="text" placeholder="Search.." value="@ViewData["searchString"]"
+                   name="searchString" style="width:50% " ; />
+            <button type="submit" value="Search" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+        </form>
+    </div>
+    <!---------------------------------------------------------------------------->
+    <br /><br />
+    <div style="position:relative;top:10%">
+        <div class="backgroundWhite container">
+
+            <ul id="menu-filters" class="menu-filter-list  text-center list-inline">
+                <li class="active btn btn-secondary ml-1 mr-1" style="display:inline" ; data-filter=".menu-restaurant">Show All</li>
+                <br />
+                <br />
+                <h3> Workshop Services</h3>
+                @foreach (var item in Model.ServiceTypes)
+                {
+    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+
+                <br />
+                <br />
+
+                <h3 style="align-content:baseline"> Spare Parts</h3>
+                @foreach (var item in Model.CategoryList)
+                {
+    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+                <br />
+                <br />
+
+                <h3> Cars</h3>
+                @foreach (var item in Model.Brands)
+                {
+    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+            </ul>
+            <br /><br />
+            <div class="row" style="position:relative; top:10%;">
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info"><i class="fas fa-tachometer-alt"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">@Model.TotalCars</span>
+                            <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalCars)</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-warning"><i class="fas fa-exclamation-circle"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">@Model.TotalServices</span>
+                            <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalServices)</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">@Model.TotalSpareParts</span>
+                            <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalSpareParts)</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger"><i class="far fa-times-circle"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">@Model.TotalUsers</span>
+                            <span class="info-box-number">@Html.DisplayNameFor(model => model.TotalUsers)</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <hr />
+            </div>
+
+            <br /><br />
+            @foreach (var category in Model.ServiceTypes)
+            {
 <div class="row" id="menu-wrapper">
     <partial name="_ThumbnailAreaPartial" model="@Model.Services.Where(u=>u.ServiceType.Name.Equals(category.Name))" />
 </div>}
-</div>
-
-<!--------------------------------------->>
-
-
-@*<div class="row">
-    @foreach (var service in Model.Services)
-    {
-<div class="col-4">
-    <div class="card mb-4">
-        <div class="card-header">
-            <h4 class="my-0 font-weight-normal">
-                <label style="font-size:23px;color:black;">@service.Name</label>
-            </h4>
-        </div>
-
-        <img class="card-img-top" style="height:100%;" src="@service.ImageUrl" alt="Card Image" />
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <label style="font-size:20px; color:#a51313"><b>Rs.@service.Price</b></label>
-                </div>
-                <a asp-action="Details" asp-controller="Home" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@service.Id"> View Details</a>
-            </div>
-        </div>
-
-    </div>
-</div>}
-</div>*@
-
-@foreach (var category in Model.CategoryList.OrderBy(o => o.DisplayOrder))
-{
-@if (Model.AutoPartList.Where(c => c.CategoryId == category.Id).Count() > 0)
-{
-<div class="row container pb-3 backgroundWhite">
-    <div class="col-12">
-        <div class="row">
-            <h4 class="text-dark"><b>@category.Name</b></h4>
-
-            <div class="col-12">
-                <div class="row my-3">
-                    @foreach (var part in Model.AutoPartList.Where(c => c.CategoryId == category.Id))
-                    {
-<div class="col-lg-4 col-xl-3 col-md-6 pb-4">
-    <div class="card" style="border:2px solid black;border-radius:5px; background:url('/images/leaves.png')">
-        <div class="pl-3 pt-1 text-center">
-            <h3 class="card-title text-dark"><b>@part.Name</b></h3>
-        </div>
-        <div class="d-flex justify-content-between ">
-            <div class="pl-1 text-muted">Price </div>
-            <div class="pr-1 text-danger h5">$@part.Price</div>
-        </div>
-        <img src="@part.MainImageUrl" class="card-img-top p-2 rounded" />
-
-        <div class="text-muted text-center pb-2">@part.Category.Name</div>
-        <div class="text-muted text-center pb-2">@part.SubCategory.Name</div>
-        <div class="text-muted text-center pb-2">@part.ApplicationUser.Name</div>
-
-        <a asp-action="DetailsPart" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@part.Id">Details</a>
-    </div>
-</div>}
-                </div>
-            </div>
         </div>
     </div>
-</div>}}
 
-@foreach (var brand in Model.Brands.OrderBy(o => o.Name))
-{
+    <!--------------------------------------->
+
+
+    <div style="position:relative;top:10%">
+        <div class="backgroundWhite container">
+
+            <ul id="menu-filters" class="menu-filter-list  text-center list-inline">
+                <li class="active btn btn-secondary ml-1 mr-1" style="display:inline" ; data-filter=".menu-restaurant">Show All</li>
+
+                @*@foreach (var item in Model.CategoryList)
+                                    {
+                        <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>
+                    }*@
+            </ul>
+
+
+            @foreach (var category in Model.CategoryList)
+            {
+<div class="row" id="menu-wrapper">
+    <partial name="_ThumbnailAreaPartialParts" model="@Model.AutoPartList.Where(u=>u.Category.Name.Equals(category.Name))" />
+</div>  }
+        </div>
+    </div>
+
+    <!------------------------------------------------------------------->
+
+
+    <div style="position:relative; top:10%;">
+        @foreach (var brand in Model.Brands.OrderBy(o => o.Name))
+        {
 @if (Model.Cars.Where(c => c.BranId == brand.Id).Count() > 0)
 {
 <div class="row container pb-3 backgroundWhite">
@@ -133,30 +372,41 @@
         </div>
     </div>
 </div>}}
+    </div>
 
-@section Scripts{
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
+    @section Scripts{
+        <script src="https://code.jquery.com/jquery-3.3.1.js"
+                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+                crossorigin="anonymous"></script>
 
-    <script>var posts = $('.post');
+        <script>
+            var posts = $('.post');
 
-    (function ($) {
+            (function ($) {
 
-        $("#menu-filters li").click(function () {
-            $("#menu-filters li").removeClass('active btn btn-secondary');
-            $(this).addClass('active btn btn-secondary');
+                $("#menu-filters li").click(function () {
+                    $("#menu-filters li").removeClass('active btn btn-secondary');
+                    $(this).addClass('active btn btn-secondary');
 
-            var selectedFilter = $(this).data("filter");
+                    var selectedFilter = $(this).data("filter");
 
-            $(".menu-restaurant").fadeOut();
+                    $(".menu-restaurant").fadeOut();
 
-            setTimeout(function () {
-                $(selectedFilter).slideDown();
-            }, 300);
-        });
+                    setTimeout(function () {
+                        $(selectedFilter).slideDown();
+                    }, 300);
+                });
 
 
 
-    })(jQuery);</script>
-}
+            })(jQuery);</script>
+
+
+
+    }
+
+</div>
+
+
+
+@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
