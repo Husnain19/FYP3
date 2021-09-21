@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using AutomotiveSols.BLL.Models;
 using AutomotiveSols.BLL.ViewModels;
 using AutomotiveSols.EmailServices;
-using AutomotiveSols.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using AutomotiveSols.Data;
 
 namespace AutomotiveSols.Areas.Admin.Controllers
 {
@@ -25,27 +22,31 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IEmailSender _emailSender;
-
+        private readonly ApplicationDbContext _db;
         public AccountController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext db)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             _emailSender = emailSender;
-
+            _db = db;
         }
         [HttpGet]
 
         public IActionResult Register()
         {
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
+
             if (ModelState.IsValid)
             {
                 // Map data from RegisterViewModel to IdentityUser
@@ -57,11 +58,15 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                     PhoneNumber = model.PhoneNumber,
                     StreetAddress = model.StreetAddress,
                     State = model.State,
-                    PostalCode = model.PostalCode
+                    PostalCode = model.PostalCode,
+                    ShowroomId = model.ShowroomId
                 };
 
                 // Store the user in AspNetUsers database table
                 var result = await userManager.CreateAsync(user, model.Password);
+
+                Random r = new Random();
+                int num = r.Next();
 
                 // If user is successfully created, sign-in the user using
                 // SignInManager and redirect to index action of HomeController
@@ -72,7 +77,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                     var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account",
                     new {  userId = user.Id, token =  code }, protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                       $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                       $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a> {num.ToString()}");
 
                     TempData["Message"] = "Confirmation Email has been send to your email. Please check email.";
                     TempData["MessageValue"] = "1";
@@ -384,6 +389,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
             var user = await userManager.FindByIdAsync(id);//find the user
 
             if (user == null)
@@ -413,6 +419,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserVM model)
         {
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
             var user = await userManager.FindByIdAsync(model.Id); //find the user
 
             if (user == null) //if the user is not present then returns

@@ -166,6 +166,9 @@ namespace AutomotiveSols.Data.Migrations
                     b.Property<int>("RegistrationCityId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ShowroomId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -192,6 +195,8 @@ namespace AutomotiveSols.Data.Migrations
                     b.HasIndex("ModelId");
 
                     b.HasIndex("RegistrationCityId");
+
+                    b.HasIndex("ShowroomId");
 
                     b.HasIndex("TransmissionId");
 
@@ -631,6 +636,40 @@ namespace AutomotiveSols.Data.Migrations
                     b.ToTable("ShoppingCarts");
                 });
 
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.Showroom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAuthorizedCompany")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Showrooms");
+                });
+
             modelBuilder.Entity("AutomotiveSols.BLL.Models.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -931,11 +970,16 @@ namespace AutomotiveSols.Data.Migrations
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ShowroomId")
+                        .HasColumnType("int");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ShowroomId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -998,6 +1042,11 @@ namespace AutomotiveSols.Data.Migrations
                         .HasForeignKey("RegistrationCityId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("AutomotiveSols.BLL.Models.Showroom", "Showroom")
+                        .WithMany("Cars")
+                        .HasForeignKey("ShowroomId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("AutomotiveSols.BLL.Models.Transmission", "Transmission")
                         .WithMany("Cars")
@@ -1218,6 +1267,14 @@ namespace AutomotiveSols.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("AutomotiveSols.BLL.Models.Showroom", "Showroom")
+                        .WithMany()
+                        .HasForeignKey("ShowroomId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

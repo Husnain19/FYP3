@@ -54,7 +54,7 @@ namespace AutomotiveSols.Data
 
 
         public DbSet<Car> Cars { get; set; }
-
+        public DbSet<Showroom>  Showrooms { get; set; }
         public DbSet<CarAppointment> CarAppointments { get; set; }
         public DbSet<CarFeature> CarFeatures { get; set; }
         public DbSet<ServicesAppointment> ServicesAppointments { get; set; }
@@ -132,7 +132,8 @@ namespace AutomotiveSols.Data
               .WithMany(k => k.Cars).HasForeignKey(k => k.MileageId);
             builder.Entity<Car>().HasOne(k => k.Brand)
               .WithMany(k => k.Cars).HasForeignKey(k => k.BranId);
-
+            builder.Entity<Car>().HasOne(k => k.Showroom)
+                .WithMany(k => k.Cars).HasForeignKey(k => k.ShowroomId);
 
             builder.Entity<Features>().HasKey(k => k.Id);
             builder.Entity<Features>().Property(k => k.Name).IsRequired();
@@ -273,7 +274,17 @@ namespace AutomotiveSols.Data
             builder.Entity<Coupon>().Property(y => y.Discount); 
             builder.Entity<Coupon>().Property(y => y.MinimumAmount); 
             builder.Entity<Coupon>().Property(y => y.Picture); 
-            builder.Entity<Coupon>().Property(y => y.IsActive); 
+            builder.Entity<Coupon>().Property(y => y.IsActive);
+
+            builder.Entity<Showroom>().HasKey(y => y.Id);
+            builder.Entity<Showroom>().Property(y => y.Name);
+            builder.Entity<Showroom>().Property(y => y.StreetAddress);
+            builder.Entity<Showroom>().Property(y => y.City);
+            builder.Entity<Showroom>().Property(y => y.State);
+            builder.Entity<Showroom>().Property(y => y.PhoneNumber);
+            builder.Entity<Showroom>().Property(y => y.PostalCode);
+            builder.Entity<Showroom>().Property(y => y.IsAuthorizedCompany);
+            
         }
 
 

@@ -17,10 +17,11 @@ namespace AutomotiveSols.BLL.Models
         public string PostalCode { get; set; }
 
 
-        // public int? OrganizationId { get; set; }
+        public int? ShowroomId { get; set; }
 
-        // [ForeignKey("ShowroomId")]
-        //        public Organization Organization { get; set; }
+    
+        public Showroom Showroom { get; set; }
+
 
         [NotMapped]
         public string Role { get; set; }

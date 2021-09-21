@@ -38,7 +38,8 @@ namespace AutomotiveSols.BLL.Models
 
         public int YearId { get; set; }
         public Year Year { get; set; }
-
+        public int? ShowroomId { get; set; }
+        public Showroom Showroom { get; set; }
         public IList<CarFeature> GetCarFeatures { get; set; }
 
         public List<CarGallery> CarGalleries { get; set; }

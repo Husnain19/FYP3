@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using AutomotiveSols.Static;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AutomotiveSols.EmailServices;
 
 namespace AutomotiveSols.Controllers
 {
@@ -25,13 +26,17 @@ namespace AutomotiveSols.Controllers
         private readonly ApplicationDbContext _db;
         private IndexViewModel IndexVM;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext db,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IEmailSender emailSender)
         {
             _logger = logger;
             _db = db;
             _userManager = userManager;
+            _emailSender = emailSender;
+
         }
 
         //public async  Task<IActionResult> Index()
@@ -209,6 +214,90 @@ namespace AutomotiveSols.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Validate()
+        {
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Validate(DecisionVM  decisionVM)
+        {
+
+            if(decisionVM.SaleOwn== true)
+            {
+                return RedirectToAction(nameof(UserAd));
+            }
+            else
+            {
+                Random r = new Random();
+                int num = r.Next();
+                HttpContext.Session.SetInt32(StaticDetails.Code, num);
+                await _emailSender.SendEmailAsync("husnainakbar140@gmail.com", "Confirm your activity",
+                       $" This is your Validation Code {num}");
+
+
+                return RedirectToAction(nameof(Verify));
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult>   Verify()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public  IActionResult Verify(CodeVM codeVM)
+        {
+           int? codeSession =  HttpContext.Session.GetInt32(StaticDetails.Code);
+            if (codeVM != null)
+            {
+                if (codeVM.Code == codeSession)
+                {
+                    return RedirectToAction(nameof(UserAd));//////////////
+                }
+                else
+                {
+                    return RedirectToAction(nameof(UserAd));//////////////
+                }
+            }
+            else
+            {
+                return RedirectToAction(nameof(UserAd));//////
+            }
+        }
+        public async Task<IActionResult> UserAd(bool isSuccess = false, int carId = 0)
+        {
+            ViewBag.BrandList = new SelectList(_db.Brands.ToList(), "Id", "Name");
+            ViewBag.ModelList = new SelectList(_db.Models.ToList(), "Id", "Name");
+            ViewBag.MileageList = new SelectList(_db.Mileages.ToList(), "Id", "NumberKm");
+            ViewBag.RegistrationCityList = new SelectList(_db.RegistrationCities.ToList(), "Id", "Name");
+            ViewBag.TransmissionList = new SelectList(_db.Transmissions.ToList(), "Id", "Name");
+            ViewBag.TrimList = new SelectList(_db.Trims.ToList(), "Id", "Name");
+            ViewBag.YearList = new SelectList(_db.Years.ToList(), "Id", "SolarYear");
+
+            var features = _db.Features.ToList();
+            CarViewModel carViewModel = new CarViewModel()
+            {
+                FeatureAssignedToCar = features.Select(s => new FeatureAssignedToCar()
+                {
+                    FeatureId = s.Id,
+                    FeatureName = s.Name,
+                    Assigned = false
+                }).ToList()
+            };
+
+            var model = carViewModel;
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.CarId = carId;
+            return View(model);
+        }
+
+        
 
         public async Task<IActionResult> DetailsPart(int id)
         {
@@ -366,6 +455,11 @@ namespace AutomotiveSols.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

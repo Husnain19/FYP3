@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutomotiveSols.BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -23,6 +24,10 @@ namespace AutomotiveSols.BLL.ViewModels
         public string Email { get; set; }
 
         public string City { get; set; }
+        public int? ShowroomId { get; set; }
+
+
+        public Showroom Showroom { get; set; }
 
         public List<string> Claims { get; set; }
 

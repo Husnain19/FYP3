@@ -1,0 +1,18 @@
+﻿@model AutomotiveSols.BLL.ViewModels.DecisionVM
+
+<form method="post" asp-area="Customer" asp-controller="Home" asp-action="Validate">
+
+    <h3>
+        Allow Us To Sale For You
+        @Html.CheckBoxFor(m => m.SaleUs)
+    </h3>
+    <br />
+    <br />
+    <h3>       I will Manage On My Own
+    @Html.CheckBoxFor(m => m.SaleOwn)
+    </h3>
+
+    <button type="submit" value="Continue" class="btn btn-success">Continue </button>
+
+
+</form>

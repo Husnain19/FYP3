@@ -7,12 +7,13 @@
         Post
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a asp-area="Customer" asp-controller="Home" asp-action="Validate">Post A Car</a><br />
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
             Launch demo modal
         </button>
         <br />
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
-            Launch demo modal
+            Post A Car
         </button>
     </div>
 </div>
@@ -23,17 +24,35 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Proceed To Post</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <form method="post" asp-area="Customer" asp-controller="Home" asp-action="Validate">
+
+                    <h3 style="position:relative; ">
+                        Allow Us To Sale For You
+                        @Html.CheckBoxFor(m => m.DecisionVM.SaleUs)
+                    </h3>
+                    <br />
+                    <button type="submit" value="Continue" class="btn btn-success" id="SaleUsBtn">Continue </button>
+
+                    <br />
+                    <h3>
+                        I will Manage On My Own
+                        @Html.CheckBoxFor(m => m.DecisionVM.SaleOwn)
+                    </h3>
+
+                    <button type="submit" value="Continue" class="btn btn-success" id="SaleOwnBtn">Continue </button>
+
+
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
             </div>
         </div>
     </div>
@@ -252,7 +271,7 @@
             <div class="row" style="position:relative; top:10%;">
                 <div class="col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-info"><i class="fas fa-tachometer-alt"></i></span>
+                        <span class="info-box-icon bg-info"><i class="fas fa-car-side"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">@Model.TotalCars</span>
@@ -263,7 +282,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-warning"><i class="fas fa-exclamation-circle"></i></span>
+                        <span class="info-box-icon bg-warning"><i class="fas fa-atom"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">@Model.TotalServices</span>
@@ -274,7 +293,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-success"><i class="far fa-check-circle"></i></span>
+                        <span class="info-box-icon bg-success"><i class="fas fa-cog"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">@Model.TotalSpareParts</span>
@@ -285,7 +304,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="info-box">
-                        <span class="info-box-icon bg-danger"><i class="far fa-times-circle"></i></span>
+                        <span class="info-box-icon bg-danger"><i class="fas fa-users-cog"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">@Model.TotalUsers</span>
@@ -399,7 +418,51 @@
 
 
 
-            })(jQuery);</script>
+            })(jQuery);
+
+
+
+            var SaleUs = document.getElementById('DecisionVM_SaleUs');
+            var SaleOwn = document.getElementById('DecisionVM_SaleOwn');
+
+             document.getElementById("SaleOwnBtn").style.display = "none";
+             document.getElementById("SaleUsBtn").style.display = "none";
+
+            var SaleOwnBtn = document.getElementById("SaleOwnBtn");
+            var SaleUsBtn = document.getElementById("SaleUsBtn");
+
+            // when unchecked or checked, run the function
+            //checker.onchange = function () {
+            //    if (this.checked) {
+            //        sendbtn.disabled = false;
+            //    } else {
+            //        sendbtn.disabled = true;
+            //    }
+
+            //}
+            SaleOwn.onchange = function () {
+                if (this.checked) {
+                    SaleUs.checked = false;
+                    SaleOwnBtn.style.display = "block";
+                    SaleUsBtn.style.display = "none";
+                } else {
+                    SaleOwnBtn.style.display = "none";
+
+                }
+            }
+            
+            SaleUs.onchange = function () {
+                if (this.checked) {
+                    SaleOwn.checked = false;
+                    SaleUsBtn.style.display = "block";
+                    SaleOwnBtn.style.display = "none";
+
+                } else {
+                    SaleUsBtn.style.display = "none";
+
+                }
+            }
+        </script>
 
 
 

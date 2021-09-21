@@ -18,6 +18,7 @@ namespace AutomotiveSols.Static
 
         public const string DefaultProductImage = "default_image.png";
         public const string ssCouponCode = "ssCouponCode";
+        public const string Code = "Code";
 
         public const string StatusPending = "Pending";
         public const string StatusApproved = "Approved";

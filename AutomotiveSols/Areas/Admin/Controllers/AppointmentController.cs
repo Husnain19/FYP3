@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using AutomotiveSols.Static;
 namespace AutomotiveSols.Areas.Admin.Controllers
 {
    // [Authorize(Roles = "Admin,Workshop")]
@@ -34,9 +34,17 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 Appointments = new List<Appointments>()
             };
             appointmentVM.Appointments = _db.Appointments.Include(x => x.SalesPerson).ToList();
-            if (User.IsInRole("Workshop"))
+          
+            if (User.IsInRole("Workshop") )
             {
                 appointmentVM.Appointments = appointmentVM.Appointments.Where(x => x.SalesPersonId == saleperson.Id).ToList();
+            }
+            else if(User.IsInRole(StaticDetails.Role_Admin))
+            {
+                appointmentVM.Appointments = _db.Appointments.Include(x => x.SalesPerson).ToList();
+            }
+            else {
+                appointmentVM.Appointments = new List<Appointments>();
             }
             if (searchName != null)
             {
@@ -74,7 +82,21 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewBag.SalePersons = new SelectList(_db.ApplicationUsers.ToList(), "Id", "Name"); ;
+            var users =  _db.ApplicationUsers.ToList();
+            List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+            for (int i = 0; i < users.Count; i++)
+            {
+                var user = await _userManager.FindByIdAsync(users[i].Id);
+                if ((await _userManager.IsInRoleAsync(user, StaticDetails.Role_Workshop)))
+                {
+                    // add the user
+                    applicationUsers.Add(user);
+                }
+            }
+
+            ViewBag.SalePersons = new SelectList(applicationUsers, "Id", "Name"); ;
+
+
 
             var serviceList = (IEnumerable<Services>)(from p in _db.Services
                                                       join a in _db.ServicesAppointments
@@ -114,8 +136,20 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 {
                     appointmentFromDb.SalesPersonId = objAppointmentVM.Appointments.SalesPersonId;
                 }
+                var users = _db.ApplicationUsers.ToList();
+                List<ApplicationUser> applicationUsers = new List<ApplicationUser>();
+                for (int i = 0; i < users.Count; i++)
+                {
+                    var user = await _userManager.FindByIdAsync(users[i].Id);
+                    if ((await _userManager.IsInRoleAsync(user, StaticDetails.Role_Workshop)))
+                    {
+                        // add the user
+                        applicationUsers.Add(user);
+                    }
+                }
 
-                ViewBag.SalePersons = new SelectList(_db.ApplicationUsers.ToList(), "Id", "Name"); ;
+                ViewBag.SalePersons = new SelectList(applicationUsers, "Id", "Name"); ;
+
                 _db.SaveChanges();
 
                 return RedirectToAction(nameof(Index));

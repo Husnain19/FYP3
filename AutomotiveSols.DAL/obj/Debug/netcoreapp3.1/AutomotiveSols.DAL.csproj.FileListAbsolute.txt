@@ -8,7 +8,7 @@ F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSo
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.DAL.pdb
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.BLL.pdb
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\bin\Debug\netcoreapp3.1\AutomotiveSols.Static.pdb
-F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csproj.CoreCompileInputs.cache
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csproj.CopyComplete
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.dll
 F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.pdb
+F:\dotnet\AutomotiveSols\AutomotiveSols.DAL\obj\Debug\netcoreapp3.1\AutomotiveSols.DAL.csproj.CoreCompileInputs.cache

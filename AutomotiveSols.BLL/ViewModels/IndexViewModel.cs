@@ -47,6 +47,8 @@ namespace AutomotiveSols.BLL.ViewModels
 
         public List<GalleryModel> Gallery { get; set; }
 
+        public DecisionVM DecisionVM { get; set; }
+
 
     }
 }

@@ -1,0 +1,6 @@
+﻿@model AutomotiveSols.BLL.ViewModels.CodeVM
+
+<form method="post" asp-area="Customer" asp-controller="Home" asp-action="Verify"> 
+    <input type="number" asp-for="@Model.Code" />
+    <input type="submit" value="Verify" />
+</form>

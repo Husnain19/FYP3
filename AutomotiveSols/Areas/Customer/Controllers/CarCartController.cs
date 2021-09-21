@@ -44,6 +44,14 @@ namespace AutomotiveSols.Areas.Customer.Controllers
                     CarAppointmentVM.Cars.Add(car);
                 }
             }
+            else
+            {
+                CarAppointmentVM carAppointmentVM = new CarAppointmentVM()
+                {
+                    Cars = new List<AutomotiveSols.BLL.Models.Car>()
+                };
+                return View(carAppointmentVM);
+            }
             return View(CarAppointmentVM);
         }
 
