@@ -205,7 +205,7 @@ namespace AutomotiveSols.Areas.Customer.Controllers
                 };
                 ShoppingCartVM.OrderHeader.OrderTotalOriginal += orderDetails.Count * orderDetails.Price;
                 _db.OrderDetails.Add(orderDetails);
-
+                
             }
 
             if (HttpContext.Session.GetString(StaticDetails.ssCouponCode) != null)

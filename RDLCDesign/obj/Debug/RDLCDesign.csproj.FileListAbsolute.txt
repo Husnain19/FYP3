@@ -1,0 +1,14 @@
+F:\dotnet\AutomotiveSols\RDLCDesign\bin\Debug\RDLCDesign.exe.config
+F:\dotnet\AutomotiveSols\RDLCDesign\bin\Debug\RDLCDesign.exe
+F:\dotnet\AutomotiveSols\RDLCDesign\bin\Debug\RDLCDesign.pdb
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.csprojAssemblyReference.cache
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.Properties.Resources.resources
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.csproj.GenerateResource.cache
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RdlCompile.cache
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RdlCompile.compiled
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.csproj.CoreCompileInputs.cache
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.exe
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.pdb
+F:\dotnet\AutomotiveSols\RDLCDesign\bin\Debug\System.Data.SqlClient.dll
+F:\dotnet\AutomotiveSols\RDLCDesign\bin\Debug\System.Data.SqlClient.xml
+F:\dotnet\AutomotiveSols\RDLCDesign\obj\Debug\RDLCDesign.csproj.CopyComplete

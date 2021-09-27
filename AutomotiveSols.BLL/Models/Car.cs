@@ -7,7 +7,7 @@ namespace AutomotiveSols.BLL.Models
     public class Car
     {
         public int Id { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

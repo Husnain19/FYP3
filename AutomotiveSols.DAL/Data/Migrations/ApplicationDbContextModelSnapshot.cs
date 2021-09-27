@@ -15,7 +15,7 @@ namespace AutomotiveSols.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.15")
+                .HasAnnotation("ProductVersion", "3.1.18")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -44,7 +44,13 @@ namespace AutomotiveSols.Data.Migrations
                     b.Property<string>("SalesPersonId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool?>("isCar")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("isConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("isService")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -75,8 +81,8 @@ namespace AutomotiveSols.Data.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 
-                    b.Property<double>("ListPrice")
-                        .HasColumnType("float");
+                    b.Property<int>("ListPrice")
+                        .HasColumnType("int");
 
                     b.Property<string>("MainImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -85,14 +91,14 @@ namespace AutomotiveSols.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Price100")
-                        .HasColumnType("float");
+                    b.Property<int>("Price100")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Price50")
-                        .HasColumnType("float");
+                    b.Property<int>("Price50")
+                        .HasColumnType("int");
 
                     b.Property<string>("SellerComments")
                         .IsRequired()
@@ -160,8 +166,8 @@ namespace AutomotiveSols.Data.Migrations
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<int>("RegistrationCityId")
                         .HasColumnType("int");
@@ -397,8 +403,7 @@ namespace AutomotiveSols.Data.Migrations
 
                     b.HasIndex("AutoPartId");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -564,8 +569,8 @@ namespace AutomotiveSols.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<string>("SellerComments")
                         .IsRequired()
@@ -1124,8 +1129,8 @@ namespace AutomotiveSols.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("AutomotiveSols.BLL.Models.OrderHeader", "OrderHeader")
-                        .WithOne("OrderDetails")
-                        .HasForeignKey("AutomotiveSols.BLL.Models.OrderDetails", "OrderId")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

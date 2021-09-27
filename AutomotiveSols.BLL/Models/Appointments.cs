@@ -22,6 +22,8 @@ namespace AutomotiveSols.BLL.Models
         public string CustomerEmail { get; set; }
         public bool isConfirmed { get; set; }
 
+        public bool? isCar { get; set; }
+        public bool? isService { get; set; }
         public List<ServicesAppointment> ServicesAppointments { get; set; }
         public List<CarAppointment> CarAppointments { get; set; }
 

@@ -1,17 +1,12 @@
 ﻿@model AutomotiveSols.BLL.ViewModels.IndexViewModel
 <!-- Button trigger modal -->
-<!------------------------------------------------------->
 
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Post
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a asp-area="Customer" asp-controller="Home" asp-action="Validate">Post A Car</a><br />
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-            Launch demo modal
-        </button>
-        <br />
+
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
             Post A Car
         </button>
@@ -58,188 +53,89 @@
     </div>
 </div>
 <!------------------------------------------------------->
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+<form method="get">
+
+    <br />
+    <div style="height:150px; background-color:aliceblue " class="container">
+
+        <div class="col-12">
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Name
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Category
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchCategory", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
             </div>
-            <div class="modal-body">
-                <!------------------------------------------------------------------------------------>
+            @*<div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Lower Price
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchPrice", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
 
+                </div>
+                <div class="col-2">
+                    Higher Price
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchPrice2", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                </div>
 
-                <form method="post" enctype="multipart/form-data" asp-action="AddNewCar" asp-controller="Car" asp-area="Admin">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>*@
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                </div>
+                <div class="col-2">
 
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Brand
-                        </div>
-                        <div class="col-8">
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                    <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
 
-                            <label class="control-label"> Brand </label>
-                            <select asp-for="Car.BranId" class="form-control" id="BrandId" asp-items="ViewBag.BrandList">
-                                <option value="">Please choose your Brand</option>
-                            </select>
-                            <span asp-validation-for="Car.Brand" class="text-danger"></span>
-
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Model
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Model </label>
-                            <select asp-for="Car.ModelId" class="form-control ModelId2" id="ModelId" asp-items="ViewBag.ModelList">
-                                <option value="">Please choose your Model</option>
-                            </select>
-                            <span asp-validation-for="Car.Model" class="text-danger"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Trim
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Trim </label>
-                            <select asp-for="Car.TrimId" class="form-control" id="TrimId" asp-items="ViewBag.TrimList">
-                                <option value="">Please choose your Trim</option>
-                            </select>
-                            <span asp-validation-for="Car.Trim" class="text-danger"></span>
-
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Mileage
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Mileage </label>
-                            <select asp-for="Car.MileageId" class="form-control" asp-items="ViewBag.MileageList">
-                                <option value="">Please choose your Mileage</option>
-                            </select>
-                            <span asp-validation-for="Car.Mileage" class="text-danger"></span>
-
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Registration City
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Registration City </label>
-                            <select asp-for="Car.RegistrationCityId" class="form-control" asp-items="ViewBag.RegistrationCityList">
-                                <option value="">Please choose your Registration City</option>
-                            </select>
-                            <span asp-validation-for="Car.RegistrationCity" class="text-danger"></span>
-
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Transmission
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Transmission </label>
-                            <select asp-for="Car.TransmissionId" class="form-control" asp-items="ViewBag.TransmissionList">
-                                <option value="">Please choose your Transmission</option>
-                            </select>
-                            <span asp-validation-for="Car.Transmission" class="text-danger"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-4">
-                            Year
-                        </div>
-                        <div class="col-8">
-
-                            <label class="control-label"> Year </label>
-                            <select asp-for="Car.YearId" class="form-control" asp-items="ViewBag.YearList">
-                                <option value="">Please choose your Year</option>
-                            </select>
-                            <span asp-validation-for="Car.Year" class="text-danger"></span>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="Car.Price" class="control-label"></label>
-                        <input asp-for="Car.Price" class="form-control" />
-                        <span asp-validation-for="Car.Price" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="CoverPhoto" class="control-label"></label>
-                        <div class="custom-file">
-                            <div class="col-5">
-                                <input type="file" name="files" class="form-control" />
-                            </div>
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
-                        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="GalleryFiles" class="control-label"></label>
-                        <div class="custom-file">
-                            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
-                        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
-                    </div>
-                    <div class="col">
-                        @for (int i = 0; i < @Model.FeatureAssignedToCar.Count; i++)
-                        {
-            @Html.HiddenFor(m => @Model.FeatureAssignedToCar[i].FeatureId)
-                            @Html.CheckBoxFor(x => @Model.FeatureAssignedToCar[i].Assigned)
-                                            <label class="form-check-label">@Model.FeatureAssignedToCar[i].FeatureName</label><br />}
-
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" value="Add" class="btn btn-primary" />
-                    </div>
-                </form>
-
-
-                <!------------------------------------------------------------------------------------>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
+
     </div>
-</div>
+
+    <br />
 
 
-<!--------------------------------------------------------------------------------------------------->
-<div style="position:relative">
-    <div style="position:relative;left:46%; top:10% ">
-        <form method="get" asp-controller="Home" asp-action="Index" class="example">
 
-            <input type="text" placeholder="Search.." value="@ViewData["searchString"]"
-                   name="searchString" style="width:50% " ; />
-            <button type="submit" value="Search" class="btn btn-primary"><i class="fa fa-search"></i></button>
+    <!------------------------------------------------------->
+    <!-- Modal -->
+    <!--------------------------------------------------------------------------------------------------->
+    <!--<div style="position:relative">
+        <div style="position:relative;left:46%; top:10% ">
+            <form method="get" asp-controller="Home" asp-action="Index" class="example">
 
-        </form>
-    </div>
+                <input type="text" placeholder="Search.." value="@ViewData["searchString"]"
+                       name="searchString" style="width:50% " ; />
+                <button type="submit" value="Search" class="btn btn-primary"><i class="fa fa-search"></i></button>
+
+            </form>
+        </div>-->
     <!---------------------------------------------------------------------------->
-    <br /><br />
+    <!--<br />-->
+    <br />
     <div style="position:relative;top:10%">
         <div class="backgroundWhite container">
 
@@ -392,81 +288,81 @@
     </div>
 </div>}}
     </div>
+</form>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
 
-    @section Scripts{
-        <script src="https://code.jquery.com/jquery-3.3.1.js"
-                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-                crossorigin="anonymous"></script>
+    <script>
+        var posts = $('.post');
 
-        <script>
-            var posts = $('.post');
+        (function ($) {
 
-            (function ($) {
+            $("#menu-filters li").click(function () {
+                $("#menu-filters li").removeClass('active btn btn-secondary');
+                $(this).addClass('active btn btn-secondary');
 
-                $("#menu-filters li").click(function () {
-                    $("#menu-filters li").removeClass('active btn btn-secondary');
-                    $(this).addClass('active btn btn-secondary');
+                var selectedFilter = $(this).data("filter");
 
-                    var selectedFilter = $(this).data("filter");
+                $(".menu-restaurant").fadeOut();
 
-                    $(".menu-restaurant").fadeOut();
-
-                    setTimeout(function () {
-                        $(selectedFilter).slideDown();
-                    }, 300);
-                });
-
-
-
-            })(jQuery);
+                setTimeout(function () {
+                    $(selectedFilter).slideDown();
+                }, 300);
+            });
 
 
 
-            var SaleUs = document.getElementById('DecisionVM_SaleUs');
-            var SaleOwn = document.getElementById('DecisionVM_SaleOwn');
+        })(jQuery);
 
-             document.getElementById("SaleOwnBtn").style.display = "none";
-             document.getElementById("SaleUsBtn").style.display = "none";
 
-            var SaleOwnBtn = document.getElementById("SaleOwnBtn");
-            var SaleUsBtn = document.getElementById("SaleUsBtn");
 
-            // when unchecked or checked, run the function
-            //checker.onchange = function () {
-            //    if (this.checked) {
-            //        sendbtn.disabled = false;
-            //    } else {
-            //        sendbtn.disabled = true;
-            //    }
+        var SaleUs = document.getElementById('DecisionVM_SaleUs');
+        var SaleOwn = document.getElementById('DecisionVM_SaleOwn');
 
-            //}
-            SaleOwn.onchange = function () {
-                if (this.checked) {
-                    SaleUs.checked = false;
-                    SaleOwnBtn.style.display = "block";
-                    SaleUsBtn.style.display = "none";
-                } else {
-                    SaleOwnBtn.style.display = "none";
+        document.getElementById("SaleOwnBtn").style.display = "none";
+        document.getElementById("SaleUsBtn").style.display = "none";
 
-                }
+        var SaleOwnBtn = document.getElementById("SaleOwnBtn");
+        var SaleUsBtn = document.getElementById("SaleUsBtn");
+
+        // when unchecked or checked, run the function
+        //checker.onchange = function () {
+        //    if (this.checked) {
+        //        sendbtn.disabled = false;
+        //    } else {
+        //        sendbtn.disabled = true;
+        //    }
+
+        //}
+        SaleOwn.onchange = function () {
+            if (this.checked) {
+                SaleUs.checked = false;
+                SaleOwnBtn.style.display = "block";
+                SaleUsBtn.style.display = "none";
+            } else {
+                SaleOwnBtn.style.display = "none";
+
             }
-            
-            SaleUs.onchange = function () {
-                if (this.checked) {
-                    SaleOwn.checked = false;
-                    SaleUsBtn.style.display = "block";
-                    SaleOwnBtn.style.display = "none";
+        }
 
-                } else {
-                    SaleUsBtn.style.display = "none";
+        SaleUs.onchange = function () {
+            if (this.checked) {
+                SaleOwn.checked = false;
+                SaleUsBtn.style.display = "block";
+                SaleOwnBtn.style.display = "none";
 
-                }
+            } else {
+                SaleUsBtn.style.display = "none";
+
             }
-        </script>
+        }
+    </script>
 
 
 
-    }
+}
 
 </div>
 

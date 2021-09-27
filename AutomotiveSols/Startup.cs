@@ -50,6 +50,12 @@ namespace AutomotiveSols
             services.AddTransient<IEmailSender, AuthMessageSender>();
 
             services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
@@ -87,7 +93,9 @@ namespace AutomotiveSols
                     name: "default",
                     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                
             });
+            
         }
     }
 }

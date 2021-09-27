@@ -12,5 +12,6 @@ namespace AutomotiveSols.BLL.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Services> Services { get; set; }
+        public List<Car> Cars { get; set; }
     }
 }

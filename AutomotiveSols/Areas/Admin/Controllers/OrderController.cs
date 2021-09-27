@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore.Reporting;
 using AutomotiveSols.BLL.Models;
 using AutomotiveSols.BLL.ViewModels;
 using AutomotiveSols.Data;
+using AutomotiveSols.Models;
+using AutomotiveSols.ServicesReport;
 using AutomotiveSols.Static;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,14 +24,18 @@ namespace AutomotiveSols.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly OrderHistoryService orderService = new OrderHistoryService();
         private readonly UserManager<ApplicationUser> _userManager;
         [BindProperty]
         public OrderVM OrderVM { get; set; }
 
-        public OrderController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
+        public OrderController(ApplicationDbContext db, UserManager<ApplicationUser> userManager,IWebHostEnvironment 
+            webHostEnvironment)
         {
             _db = db;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> Index(string status = "")
         {
@@ -43,9 +52,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             else if (User.IsInRole(StaticDetails.Role_Vendor))
             {
                  orderHeaderList = _db.OrderHeaders.Include(x => x.ApplicationUser)
-                    .Include(x=>x.OrderDetails)
-                    .ThenInclude(x=>x.AutoPart)
-                    .Where(x=>part.ApplicationUserId == applicationUser.Id).ToList();
+                   .Where(x=>part.ApplicationUserId == applicationUser.Id).ToList();
 
                 
 
@@ -79,6 +86,80 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             }
 
             return View( orderHeaderList );
+        }
+
+
+        public IActionResult OrderHistory()
+        {
+            var dt = new DataTable();
+            dt = orderService.GetOrders();
+
+            string mimtype = "";
+            int extension = 1;
+            var path = $"{this._webHostEnvironment.WebRootPath}\\Reports\\Report4.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("DataSet2", dt);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+            return File(result.MainStream, "application/pdf");
+
+
+           
+        }
+
+        public IActionResult Invoice(int id)
+        {
+            OrderVM OrderVM = new OrderVM()
+            {
+                OrderHeader = _db.OrderHeaders.Include(x => x.ApplicationUser).FirstOrDefault(u => u.Id == id),
+                OrderDetails = _db.OrderDetails.Include(x => x.AutoPart).Where(o => o.OrderId == id).ToList()
+
+            };
+
+            string mimtype = "";
+            int extension = 1;
+            var path = $"{this._webHostEnvironment.WebRootPath}\\Reports\\Report2.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+
+            int count = OrderVM.OrderDetails.Count();
+            int p = 1;
+            while (count > 0)
+            {
+                foreach (var item in OrderVM.OrderDetails)
+                {
+                
+                    parameters.Add("rp"+p.ToString(), item.AutoPart.Name);
+                    p = p + 1;
+                    parameters.Add("rp"+p.ToString(), item.AutoPart.Price.ToString());
+                    p = p + 1;
+                    count = count - 1;
+                }
+                
+            }
+            parameters.Add("rp5", OrderVM.OrderHeader.ApplicationUser.Name);
+            parameters.Add("rp6", OrderVM.OrderHeader.ApplicationUser.Email);
+            parameters.Add("rp7", OrderVM.OrderHeader.PhoneNumber);
+            parameters.Add("rp9", OrderVM.OrderHeader.PostalCode);
+            parameters.Add("rp10", OrderVM.OrderHeader.State);
+            parameters.Add("rp11", OrderVM.OrderHeader.City);
+            parameters.Add("rp12", OrderVM.OrderHeader.StreetAddress);
+            parameters.Add("rp13", OrderVM.OrderHeader.ShippingDate.ToString());
+            parameters.Add("rp14", OrderVM.OrderHeader.TrackingNumber);
+            parameters.Add("rp15", OrderVM.OrderHeader.TransactionId);
+            //parameters.Add("rp16", OrderVM.OrderHeader.CouponCode);
+            parameters.Add("rp17", OrderVM.OrderHeader.Carrier);
+            parameters.Add("rp18", OrderVM.OrderHeader.OrderDate.ToString());
+            parameters.Add("rp19", OrderVM.OrderHeader.OrderTotalOriginal.ToString());
+            parameters.Add("rp20", OrderVM.OrderHeader.PaymentStatus);
+            LocalReport localReport = new LocalReport(path);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+            return File(result.MainStream, "application/pdf");
+
+
+           
         }
 
         public IActionResult Details(int id)

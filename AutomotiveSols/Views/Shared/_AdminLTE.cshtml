@@ -98,7 +98,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                             role="menu" data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                             <li class="nav-item has-treeview menu-open">
                                 <a href="#" class="nav-link ">
                                     <i class="nav-icon fas fa-car-side"></i>
@@ -162,6 +162,12 @@
                                         <a asp-area="Admin" asp-controller="Showrooms" asp-action="Index" class="nav-link ">
                                             <i class="fas fa-car-alt nav-icon"></i>
                                             <p>Showrooms</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="CarAppointment" asp-action="Index" class="nav-link ">
+                                            <i class="fas fa-tags nav-icon"></i>
+                                            <p>Appointments</p>
                                         </a>
                                     </li>
                                 </ul>
@@ -273,6 +279,42 @@
                                 </ul>
 
                             </li>
+
+                            <li class="nav-item has-treeview menu-open">
+                                <a href="#" class="nav-link ">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    Reports
+                                    <i class="right fas fa-angle-left"></i>
+
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Order" asp-action="OrderHistory" class="nav-link ">
+                                            <i class="fas fa-users-cog nav-icon"></i>
+                                            <p>All Orders</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Order" asp-action="ListRoles" class="nav-link ">
+                                            <i class="fas fa-atom nav-icon"></i>
+                                            <p>List of Roles</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Account" asp-action="Register" class="nav-link ">
+                                            <i class="fas fa-tags nav-icon"></i>
+                                            <p>Add New User</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="Admin" asp-controller="Account" asp-action="CreateRole" class="nav-link ">
+                                            <i class="fas fa-store-alt nav-icon"></i>
+                                            <p>Add New Role</p>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </li>
                         </ul>
                     </nav>}
                 else
@@ -280,18 +322,35 @@
                     <nav class ="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
                             role="menu" data-accordion="false">
-
-                            <li class="nav-item">
-                                <a asp-area="Admin" asp-controller="Appointment" asp-action="Index" class="nav-link ">
-                                    <i class="fas fa-store-alt nav-icon"></i>
-                                    <p>Appointments</p>
-                                </a>
-                            </li>
-
+                            @if (User.IsInRole(StaticDetails.Role_Super_Dealer) || User.IsInRole(StaticDetails.Role_Dealer))
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="CarAppointment" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-store-alt nav-icon"></i>
+                                        <p>Appointments</p>
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole(StaticDetails.Role_Super_Workshop) || User.IsInRole(StaticDetails.Role_Workshop))
+                            {
+                                <li class="nav-item">
+                                    <a asp-area="Admin" asp-controller="Appointment" asp-action="Index" class="nav-link ">
+                                        <i class="fas fa-store-alt nav-icon"></i>
+                                        <p>Appointments</p>
+                                    </a>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="nav-link ">
                                     <i class="fas fa-store-alt nav-icon"></i>
                                     <p>Orders</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-area="Admin" asp-controller="Car" asp-action="CarAd" class="nav-link ">
+                                    <i class="fas fa-store-alt nav-icon"></i>
+                                    <p>Car Ads</p>
                                 </a>
                             </li>
                         </ul>

@@ -1,164 +1,177 @@
 ﻿@model AutomotiveSols.CarViewModel
 @{
-    ViewData["Title"] = "Add new AutoPart";
+    ViewData["Title"] = "Add new Car";
 }
 <div class="container">
-    <h3 class="display-4">Add new Car</h3>
+    <h3 class="display-4">Post Your Car</h3>
     <hr />
     @if (ViewBag.IsSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Congratulations</strong> You have added new car successfully. <br />
-            Click <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.CarId">here</a> to view the details
+            Click <a asp-controller="Home" asp-action="UserAdDetial" asp-route-id="@ViewBag.CarId">here</a> to view the details
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     }
 
-    <form method="post" enctype="multipart/form-data" asp-action="AddNewCar" asp-controller="Car" asp-area="Admin">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                Brand
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Brand </label>
-                <select asp-for="Car.BranId" class="form-control" id="BrandId" asp-items="ViewBag.BrandList">
-                    <option value="">Please choose your Brand</option>
-                </select>
-                <span asp-validation-for="Car.Brand" class="text-danger"></span>
-
-            </div>
+<form method="post" enctype="multipart/form-data" asp-action="AddNewCar" asp-controller="Car" asp-area="Admin">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-4">
+            Showroom
         </div>
-        <div class="form-group row">
-            <div class="col-4">
-                Model
-            </div>
-            <div class="col-8">
+        <div class="col-8">
 
-                <label class="control-label"> Model </label>
-                <select asp-for="Car.ModelId" class="form-control ModelId2" id="ModelId" asp-items="ViewBag.ModelList">
-                    <option value="">Please choose your Model</option>
-                </select>
-                <span asp-validation-for="Car.Model" class="text-danger"></span>
-
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                Trim
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Trim </label>
-                <select asp-for="Car.TrimId" class="form-control" id="TrimId" asp-items="ViewBag.TrimList">
-                    <option value="">Please choose your Trim</option>
-                </select>
-                <span asp-validation-for="Car.Trim" class="text-danger"></span>
-
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                Mileage
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Mileage </label>
-                <select asp-for="Car.MileageId" class="form-control" asp-items="ViewBag.MileageList">
-                    <option value="">Please choose your Mileage</option>
-                </select>
-                <span asp-validation-for="Car.Mileage" class="text-danger"></span>
-
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                Registration City
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Registration City </label>
-                <select asp-for="Car.RegistrationCityId" class="form-control" asp-items="ViewBag.RegistrationCityList">
-                    <option value="">Please choose your Registration City</option>
-                </select>
-                <span asp-validation-for="Car.RegistrationCity" class="text-danger"></span>
-
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-4">
-                Transmission
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Transmission </label>
-                <select asp-for="Car.TransmissionId" class="form-control" asp-items="ViewBag.TransmissionList">
-                    <option value="">Please choose your Transmission</option>
-                </select>
-                <span asp-validation-for="Car.Transmission" class="text-danger"></span>
-
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-4">
-                Year
-            </div>
-            <div class="col-8">
-
-                <label class="control-label"> Year </label>
-                <select asp-for="Car.YearId" class="form-control" asp-items="ViewBag.YearList">
-                    <option value="">Please choose your Year</option>
-                </select>
-                <span asp-validation-for="Car.Year" class="text-danger"></span>
-
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Car.Price" class="control-label"></label>
-            <input asp-for="Car.Price" class="form-control" />
-            <span asp-validation-for="Car.Price" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CoverPhoto" class="control-label"></label>
-            <div class="custom-file">
-                <div class="col-5">
-                    <input type="file" name="files" class="form-control" />
-                </div>
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="GalleryFiles" class="control-label"></label>
-            <div class="custom-file">
-                <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
-        </div>
-        <div class="col">
-            @for (int i = 0; i < @Model.FeatureAssignedToCar.Count; i++)
-            {
-                @Html.HiddenFor(m => @Model.FeatureAssignedToCar[i].FeatureId)
-                @Html.CheckBoxFor(x => @Model.FeatureAssignedToCar[i].Assigned)
-                <label class="form-check-label">@Model.FeatureAssignedToCar[i].FeatureName</label><br />
-            }
+            <label class="control-label"> Showroom </label>
+            <select asp-for="Car.ShowroomId" class="form-control"  asp-items="ViewBag.ShowroomList">
+                <option value="">Please choose your Showroom</option>
+            </select>
+            <span asp-validation-for="Car.Showroom" class="text-danger"></span>
 
         </div>
-
-        <div class="form-group">
-            <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Brand
         </div>
-    </form>
+        <div class="col-8">
+
+            <label class="control-label"> Brand </label>
+            <select asp-for="Car.BranId" class="form-control" id="BrandId" asp-items="ViewBag.BrandList">
+                <option value="">Please choose your Brand</option>
+            </select>
+            <span asp-validation-for="Car.Brand" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Model
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Model </label>
+            <select asp-for="Car.ModelId" class="form-control ModelId2" id="ModelId" asp-items="ViewBag.ModelList">
+                <option value="">Please choose your Model</option>
+            </select>
+            <span asp-validation-for="Car.Model" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-4">
+            Trim
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Trim </label>
+            <select asp-for="Car.TrimId" class="form-control" id="TrimId" asp-items="ViewBag.TrimList">
+                <option value="">Please choose your Trim</option>
+            </select>
+            <span asp-validation-for="Car.Trim" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Mileage
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Mileage </label>
+            <select asp-for="Car.MileageId" class="form-control" asp-items="ViewBag.MileageList">
+                <option value="">Please choose your Mileage</option>
+            </select>
+            <span asp-validation-for="Car.Mileage" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Registration City
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Registration City </label>
+            <select asp-for="Car.RegistrationCityId" class="form-control" asp-items="ViewBag.RegistrationCityList">
+                <option value="">Please choose your Registration City</option>
+            </select>
+            <span asp-validation-for="Car.RegistrationCity" class="text-danger"></span>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-4">
+            Transmission
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Transmission </label>
+            <select asp-for="Car.TransmissionId" class="form-control" asp-items="ViewBag.TransmissionList">
+                <option value="">Please choose your Transmission</option>
+            </select>
+            <span asp-validation-for="Car.Transmission" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-4">
+            Year
+        </div>
+        <div class="col-8">
+
+            <label class="control-label"> Year </label>
+            <select asp-for="Car.YearId" class="form-control" asp-items="ViewBag.YearList">
+                <option value="">Please choose your Year</option>
+            </select>
+            <span asp-validation-for="Car.Year" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Car.Price" class="control-label"></label>
+        <input asp-for="Car.Price" class="form-control" />
+        <span asp-validation-for="Car.Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CoverPhoto" class="control-label"></label>
+        <div class="custom-file">
+            <div class="col-5">
+                <input type="file" name="files" class="form-control" />
+            </div>
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="GalleryFiles" class="control-label"></label>
+        <div class="custom-file">
+            <input asp-for="GalleryFiles" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+    </div>
+    <div class="col">
+        @for (int i = 0; i < @Model.FeatureAssignedToCar.Count; i++)
+        {
+            @Html.HiddenFor(m => @Model.FeatureAssignedToCar[i].FeatureId)
+            @Html.CheckBoxFor(x => @Model.FeatureAssignedToCar[i].Assigned)
+            <label class="form-check-label">@Model.FeatureAssignedToCar[i].FeatureName</label><br />
+        }
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add" class="btn btn-primary" />
+    </div>
+</form>
 </div>
 
 
@@ -166,7 +179,7 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
+       $(document).ready(function () {
             getModels();
             //getTrims();
             $('#BrandId').change(function () {
@@ -190,9 +203,7 @@
 
                 $('#ModelId').html(items);
             })
-        }
-
-            @*function getTrims() {
+        }      @*function getTrims() {
             var url = '@Url.Content("~/")' + "Admin/Trim/GetTrims";
             var ddlsoruce = '.ModelId2';
             $.getJSON(url, { id: $(ddlsoruce).val() }, function (data) {

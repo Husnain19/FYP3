@@ -8,6 +8,7 @@ namespace AutomotiveSols.BLL.Models
 {
     public class OrderHeader
     {
+        [Key]
         public int Id { get; set; }
 
         public string ApplicationUserId { get; set; }
@@ -50,7 +51,7 @@ namespace AutomotiveSols.BLL.Models
         [Required]
         public string Name { get; set; }
 
-        public OrderDetails OrderDetails { get; set; }
+       
 
     }
 }

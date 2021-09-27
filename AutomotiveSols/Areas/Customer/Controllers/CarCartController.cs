@@ -68,6 +68,8 @@ namespace AutomotiveSols.Areas.Customer.Controllers
                                                             .AddMinutes(CarAppointmentVM.Appointments.AppointmentTime.Minute);
 
             Appointments appointments = CarAppointmentVM.Appointments;
+            appointments.isCar = true;
+            appointments.isService = false;
             _db.Appointments.Add(appointments);
             _db.SaveChanges();
 

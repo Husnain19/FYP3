@@ -41,7 +41,23 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 .Include(x=>x.Year)
                 .Include(x=>x.Model)
                 .Include(x=>x.CarGalleries)
-                .Include(x=>x.GetCarFeatures).Include(x=>x.ApplicationUser).ToList());
+                .Include(x=>x.GetCarFeatures).Include(x=>x.ApplicationUser)
+                .ToList());
+        }
+
+        public async Task<IActionResult> CarAd()
+        {
+            var applicationUser = await _userManager.GetUserAsync(User);
+
+            return View(_db.Cars.Include(x => x.Brand)
+                .Include(x => x.Transmission)
+                .Include(x => x.Trim)
+                .Include(x => x.RegistrationCity)
+                .Include(x => x.Year)
+                .Include(x => x.Model)
+                .Include(x => x.CarGalleries)
+                .Include(x => x.GetCarFeatures).Include(x => x.ApplicationUser).
+                Where(x=>x.ApplicationUserId==applicationUser.Id && x.Status == false).ToList());
         }
 
         [HttpGet]
@@ -54,7 +70,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             ViewBag.TransmissionList = new SelectList(_db.Transmissions.ToList(), "Id", "Name");
             ViewBag.TrimList = new SelectList(_db.Trims.ToList(), "Id", "Name");
             ViewBag.YearList = new SelectList(_db.Years.ToList(), "Id", "SolarYear");
-
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
             var features = _db.Features.ToList();
             CarViewModel carViewModel = new CarViewModel()
             {
@@ -82,6 +98,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             ViewBag.TransmissionList = new SelectList(_db.Transmissions.ToList(), "Id", "Name");
             ViewBag.TrimList = new SelectList(_db.Trims.ToList(), "Id", "Name");
             ViewBag.YearList = new SelectList(_db.Years.ToList(), "Id", "SolarYear");
+            ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
             var applicationUser = await _userManager.GetUserAsync(User);
 
             //carModel.autoPart.Status = false;
@@ -112,6 +129,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 }
 
                 carModel.Car.ApplicationUserId = applicationUser.Id;
+                //carModel.Car.ShowroomId = 
                 carModel.Car.CarGalleries = new List<CarGallery>();
 
                 foreach (var file in carModel.Gallery)
@@ -182,6 +200,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             
             var data = _db.Cars.Include(x => x.Brand)
                 .Include(x => x.Transmission)
+                .Include(x=>x.Showroom)
                 .Include(x => x.Trim)
                 .Include(x => x.RegistrationCity)
                 .Include(x => x.Year)
@@ -209,13 +228,20 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             IEnumerable<Transmission> transmissions = _db.Transmissions.ToList();
             IEnumerable<Trim> trim = _db.Trims.ToList();
             IEnumerable<Year> year = _db.Years.ToList();
-
+            IEnumerable<Showroom> showroom = _db.Showrooms.ToList();
+            
             var features = _db.Features.ToList();
             var featureSelected = _db.CarFeatures.Include(x => x.Features).Where(x => x.Id == data.Id).ToList();
             var model = new CarViewModel()
             {
                 Car = data,
-                BrandList = brands.Select(i=>new SelectListItem
+                BrandList = brands.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+
+                }),
+                ShowroomList = showroom.Select(i=>new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString()
@@ -274,8 +300,6 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, CarViewModel carViewModel)
         {
-
-
             if (ModelState.IsValid)
             {
                 string webRootPath = _webHostEnvironment.WebRootPath;
@@ -283,7 +307,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 var applicationUser = await _userManager.GetUserAsync(User);
 
                 var serviceFromDb = _db.Cars.Where(m => m.Id == carViewModel.Car.Id).FirstOrDefault();
-
+                ViewBag.ShowroomList = new SelectList(_db.Showrooms.ToList(), "Id", "Name");
                 if (files.Count > 0 && files[0] != null)
                 {
                     //if user uploads a new image
@@ -315,7 +339,7 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                 serviceFromDb.MileageId = carViewModel.Car.MileageId;
 
                 serviceFromDb.TrimId = carViewModel.Car.TrimId;
-
+                serviceFromDb.ShowroomId = carViewModel.Car.ShowroomId;
                 serviceFromDb.TransmissionId = carViewModel.Car.TransmissionId;
 
                 serviceFromDb.RegistrationCityId = carViewModel.Car.RegistrationCityId;
@@ -368,6 +392,13 @@ namespace AutomotiveSols.Areas.Admin.Controllers
                         Text = i.Name,
                         Value = i.Id.ToString()
 
+
+                    });
+
+                    carViewModel.ShowroomList = _db.Showrooms.ToList().Select(i => new SelectListItem
+                    {
+                        Text = i.Name,
+                        Value = i.Id.ToString()
                     });
                     carViewModel.ModelList = _db.Models.ToList().Select(i => new SelectListItem
                     {
@@ -416,7 +447,30 @@ namespace AutomotiveSols.Areas.Admin.Controllers
 
         }
 
+        public async Task<IActionResult> GetCar(int id)
+        {
+            var applicationUser = await _userManager.GetUserAsync(User);
 
+            return View(_db.Cars.Include(x => x.Brand)
+                .Include(x=>x.Showroom)
+                .Include(x => x.Transmission)
+                .Include(x => x.Trim)
+                .Include(x => x.RegistrationCity)
+                .Include(x => x.Year)
+                .Include(x => x.Model)
+                .Include(x => x.CarGalleries)
+                .Include(x => x.GetCarFeatures).Include(x => x.ApplicationUser).
+                Where(x => x.ApplicationUserId == applicationUser.Id && x.Id == id && x.Status ==false).FirstOrDefault());
+        }
+
+        public IActionResult DeleteStatus(int id)
+        {
+            Car car =  _db.Cars.FirstOrDefault(x=>x.Id==id);
+            car.Status = true;
+            _db.Cars.Update(car);
+            _db.SaveChanges();
+            return View(RedirectToAction(nameof(GetCar)));
+        }
         private bool IsExist(IEnumerable<CarFeature> source, int carId, int featureId)
         {
             return source.Where(x => x.Id == carId).Any(c => c.FeatureId == featureId);

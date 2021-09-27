@@ -18,6 +18,7 @@ namespace AutomotiveSols
         public IEnumerable<SelectListItem> TransmissionList { get; set; }
         public IEnumerable<SelectListItem> TrimList { get; set; }
         public IEnumerable<SelectListItem> YearList { get; set; }
+        public IEnumerable<SelectListItem> ShowroomList { get; set; }
 
         public IFormFile CoverPhoto { get; set; }
         public string CoverImageUrl { get; set; }

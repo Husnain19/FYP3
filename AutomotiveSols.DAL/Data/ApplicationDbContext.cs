@@ -164,6 +164,9 @@ namespace AutomotiveSols.Data
             builder.Entity<Appointments>().Property(k => k.CustomerName).IsRequired();
             builder.Entity<Appointments>().Property(k => k.CustomerPhoneNumber).IsRequired();
             builder.Entity<Appointments>().Property(k => k.isConfirmed);
+            builder.Entity<Appointments>().Property(k => k.isService);
+            builder.Entity<Appointments>().Property(k => k.isCar);
+
             builder.Entity<Appointments>().HasOne(k => k.SalesPerson)
                 .WithMany(k => k.Appointments).HasForeignKey(k => k.SalesPersonId);
 
@@ -230,42 +233,46 @@ namespace AutomotiveSols.Data
             //builder.Entity<Organization>().Property(m => m.City).IsRequired();
             //builder.Entity<Organization>().Property(m => m.IsAuthorizedCompany).IsRequired();
 
-            //builder.Entity<ShoppingCart>().HasKey(m => m.Id);
+           // builder.Entity<ShoppingCart>().HasKey(m => m.Id);
             builder.Entity<ShoppingCart>().Property(m => m.Count);
 
-            builder.Entity<OrderHeader>().HasKey(m => m.Id);
-            builder.Entity<OrderHeader>().Property(g => g.OrderDate);
-            builder.Entity<OrderHeader>().Property(g => g.ShippingDate);
-            builder.Entity<OrderHeader>().Property(g => g.OrderTotalOriginal);
-            builder.Entity<OrderHeader>().Property(g => g.OrderTotal);
-            builder.Entity<OrderHeader>().Property(g => g.CouponCode);
-            builder.Entity<OrderHeader>().Property(g => g.CouponCodeDiscount);
-            builder.Entity<OrderHeader>().Property(g => g.TrackingNumber);
-            builder.Entity<OrderHeader>().Property(g => g.Carrier);
-            builder.Entity<OrderHeader>().Property(g => g.OrderStatus);
-            builder.Entity<OrderHeader>().Property(g => g.PaymentStatus);
-            builder.Entity<OrderHeader>().Property(g => g.PaymentDate);
-            builder.Entity<OrderHeader>().Property(g => g.PaymentDueDate);
-            builder.Entity<OrderHeader>().Property(g => g.TransactionId);
-            builder.Entity<OrderHeader>().Property(g => g.PhoneNumber);
-            builder.Entity<OrderHeader>().Property(g => g.CashonDelivery);
 
-            builder.Entity<OrderHeader>().Property(g => g.StreetAddress);
-            builder.Entity<OrderHeader>().Property(g => g.City);
-            builder.Entity<OrderHeader>().Property(g => g.State);
-            builder.Entity<OrderHeader>().Property(g => g.PostalCode);
+            //builder.Entity<OrderHeader>().HasKey(m => m.Id);
+            //builder.Entity<OrderHeader>().Property(g => g.OrderDate);
+            //builder.Entity<OrderHeader>().Property(g => g.ShippingDate);
+            //builder.Entity<OrderHeader>().Property(g => g.OrderTotalOriginal);
+            //builder.Entity<OrderHeader>().Property(g => g.OrderTotal);
+            //builder.Entity<OrderHeader>().Property(g => g.CouponCode);
+            //builder.Entity<OrderHeader>().Property(g => g.CouponCodeDiscount);
+            //builder.Entity<OrderHeader>().Property(g => g.TrackingNumber);
+            //builder.Entity<OrderHeader>().Property(g => g.Carrier);
+            //builder.Entity<OrderHeader>().Property(g => g.OrderStatus);
+            //builder.Entity<OrderHeader>().Property(g => g.PaymentStatus);
+            //builder.Entity<OrderHeader>().Property(g => g.PaymentDate);
+            //builder.Entity<OrderHeader>().Property(g => g.PaymentDueDate);
+            //builder.Entity<OrderHeader>().Property(g => g.TransactionId);
+            //builder.Entity<OrderHeader>().Property(g => g.PhoneNumber);
+            //builder.Entity<OrderHeader>().Property(g => g.CashonDelivery);
 
-            builder.Entity<OrderHeader>().Property(g => g.Name);
+            //builder.Entity<OrderHeader>().Property(g => g.StreetAddress);
+            //builder.Entity<OrderHeader>().Property(g => g.City);
+            //builder.Entity<OrderHeader>().Property(g => g.State);
+            //builder.Entity<OrderHeader>().Property(g => g.PostalCode);
 
-            builder.Entity<OrderHeader>().HasOne(m => m.ApplicationUser).WithMany(m => m.OrderHeaders).HasForeignKey(m => m.ApplicationUserId);
+            //builder.Entity<OrderHeader>().Property(g => g.Name);
 
-            builder.Entity<OrderDetails>().HasKey(y => y.Id);
-            builder.Entity<OrderDetails>().Property(y => y.Count);
-            builder.Entity<OrderDetails>().Property(y => y.Price);
+            //builder.Entity<OrderHeader>().HasOne(m => m.ApplicationUser).WithMany(m => m.OrderHeaders)
+            //    .HasForeignKey(m => m.ApplicationUserId).OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<OrderDetails>().HasOne(y => y.OrderHeader).WithOne(y => y.OrderDetails).HasForeignKey<OrderDetails>(y => y.OrderId);
-            builder.Entity<OrderDetails>().HasOne(y => y.AutoPart).WithMany
-                (y => y.OrderDetails).HasForeignKey(y => y.AutoPartId);
+            //builder.Entity<OrderDetails>().HasKey(y => y.Id);
+            //builder.Entity<OrderDetails>().Property(y => y.Count);
+            //builder.Entity<OrderDetails>().Property(y => y.Price);
+
+            //builder.Entity<OrderDetails>().HasOne(y => y.OrderHeader)
+            //    .WithOne(y => y.OrderDetails).HasForeignKey<OrderDetails>(y => y.OrderId).OnDelete(DeleteBehavior.Restrict);
+            //builder.Entity<OrderDetails>().HasOne(y => y.AutoPart).WithMany
+            //    (y => y.OrderDetails).HasForeignKey(y => y.AutoPartId).OnDelete(DeleteBehavior.Cascade);
+
 
 
             builder.Entity<Coupon>().HasKey(y => y.Id);

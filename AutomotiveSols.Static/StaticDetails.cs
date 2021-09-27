@@ -34,7 +34,10 @@ namespace AutomotiveSols.Static
         public const string Role_Admin = "Admin";
         public const string Role_Vendor = "Vendor";
         public const string Role_Workshop = "Workshop";
+        public const string Role_Super_Workshop = "SuperWorkshop";
         public const string Role_Customer = "Customer";
+        public const string Role_Dealer = "Dealer";
+        public const string Role_Super_Dealer = "SuperDealer";
 
 
 

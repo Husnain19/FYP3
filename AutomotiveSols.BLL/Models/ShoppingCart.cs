@@ -12,15 +12,15 @@ namespace AutomotiveSols.BLL.Models
         {
             Count = 1;
         }
-        
+       // [Key]
         public int Id { get; set; }
 
         public string ApplicationUserId { get; set; }
-       // [ForeignKey("ApplicationUserId")]
+       [ForeignKey("ApplicationUserId")]
         public ApplicationUser ApplicationUser { get; set; }
 
         public int AutoPartId { get; set; }
-       // [ForeignKey("AutoPartId")]
+        [ForeignKey("AutoPartId")]
         public AutoPart AutoPart { get; set; }
 
         [Range(1, 1000, ErrorMessage = "Please enter a value between 1 and 1000")]

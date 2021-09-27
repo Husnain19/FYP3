@@ -265,6 +265,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "AspNetCore.Reporting": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[2.13.0, )"
@@ -275,11 +279,11 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[3.1.18, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.1.8, )"
+              "version": "[3.1.18, )"
             },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
@@ -306,6 +310,14 @@
             "Stripe.net": {
               "target": "Package",
               "version": "[39.53.0, )"
+            },
+            "System.CodeDom": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
             }
           },
           "imports": [

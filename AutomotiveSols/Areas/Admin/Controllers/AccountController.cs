@@ -15,7 +15,7 @@ using AutomotiveSols.Data;
 namespace AutomotiveSols.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+  
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -143,8 +143,8 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         }
 
         [HttpGet]
-
-        public IActionResult Login(string returnUrl)
+       
+        public IActionResult Login()
         {
             return View();
         }

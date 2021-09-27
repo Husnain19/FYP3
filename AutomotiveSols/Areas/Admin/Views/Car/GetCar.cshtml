@@ -1,0 +1,87 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+
+@model AutomotiveSols.BLL.Models.Car
+@{
+    ViewData["Title"] = "Car Details " + Model.Trim.Name;
+}
+
+
+<div class="container">
+    <h3 class="display-4">Car details</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+
+                    @for (int i = 0; i < Model.CarGalleries.Count(); i++)
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@(i==0 ? "active" : "") "></li>
+                    }
+                </ol>
+                <div class="carousel-inner">
+                    @for (int i = 0; i < Model.CarGalleries.Count(); i++)
+                    {
+                        <div class="@(i==0 ? "carousel-item active" : "carousel-item") ">
+                            <img class="d-block w-100" src="@Model.CarGalleries[i].URL" alt="@Model.CarGalleries[i].Name">
+                        </div>
+                    }
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Model.Name</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-primary">
+                    <span class="label label-primary">By: </span>
+                    <span class="monospaced">@Model.ApplicationUser.Name</span>
+                </div>
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <p class="description">
+                            @Model.
+                        </p>
+                    </div>
+                </div>*@
+
+
+            <hr />
+
+            <ul class="list-group">
+                <li class="list-group-item"><span class="font-weight-bold">Trim - </span> @Model.Trim.Name</li>
+                <li class="list-group-item"><span class="font-weight-bold">Transmission - </span> @Model.Transmission.Name</li>
+                <li class="list-group-item"><span class="font-weight-bold">Showroom - </span> @Model.Showroom.Name</li>
+                <li class="list-group-item"><span class="font-weight-bold">Year - </span> @Model.Year.SolarYear</li>
+                <li class="list-group-item"><span class="font-weight-bold">RegistrationCity - </span> @Model.RegistrationCity.Name</li>
+            </ul>
+        </div>
+
+    </div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (User.Equals(Model.ApplicationUser))
+        {
+
+
+        }
+
+
+    }
+    <a asp-action="DeleteStatus" asp-route-id="@Model.Id">Delete</a>
+
+</div>
