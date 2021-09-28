@@ -49,6 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApprovedOrders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -60,8 +65,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PendingOrders.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ApprovedOrders.rdlc" />
+    <EmbeddedResource Include="PendingOrders.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -74,6 +86,17 @@
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Report4.rdlc" />
+    <None Include="ApprovedOrders.xsc">
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+    </None>
+    <None Include="ApprovedOrders.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ApprovedOrders.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ApprovedOrders.xss">
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+    </None>
     <None Include="DataSet2.xsc">
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </None>
@@ -86,6 +109,17 @@
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="PendingOrders.xsc">
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
+    </None>
+    <None Include="PendingOrders.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PendingOrders.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="PendingOrders.xss">
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

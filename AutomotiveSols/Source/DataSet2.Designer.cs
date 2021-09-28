@@ -399,7 +399,7 @@ namespace AutomotiveSols.Source {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public dsOrderHistoryRow AdddsOrderHistoryRow(System.DateTime OrderDate, string Name, double Price, int Count, string Email) {
+            public dsOrderHistoryRow AdddsOrderHistoryRow(System.DateTime OrderDate, string Name, int Price, int Count, string Email) {
                 dsOrderHistoryRow rowdsOrderHistoryRow = ((dsOrderHistoryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         OrderDate,
@@ -443,7 +443,7 @@ namespace AutomotiveSols.Source {
                 base.Columns.Add(this.columnOrderDate);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
-                this.columnPrice = new global::System.Data.DataColumn("Price", typeof(double), null, global::System.Data.MappingType.Element);
+                this.columnPrice = new global::System.Data.DataColumn("Price", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPrice);
                 this.columnCount = new global::System.Data.DataColumn("Count", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCount);
@@ -623,10 +623,10 @@ namespace AutomotiveSols.Source {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public double Price {
+            public int Price {
                 get {
                     try {
-                        return ((double)(this[this.tabledsOrderHistory.PriceColumn]));
+                        return ((int)(this[this.tabledsOrderHistory.PriceColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Price\' in table \'dsOrderHistory\' is DBNull.", e);

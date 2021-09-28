@@ -58,6 +58,10 @@ namespace AutomotiveSols.Data
         public DbSet<CarAppointment> CarAppointments { get; set; }
         public DbSet<CarFeature> CarFeatures { get; set; }
         public DbSet<ServicesAppointment> ServicesAppointments { get; set; }
+        public DbSet<QR> QRs { get; set; }
+        public DbSet<Payment>    Payments { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

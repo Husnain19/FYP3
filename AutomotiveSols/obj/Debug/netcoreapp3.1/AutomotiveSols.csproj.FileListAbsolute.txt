@@ -627,3 +627,9 @@ F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\AutomotiveSols.M
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\CarAd.cshtml.g.cs
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\GetCar.cshtml.g.cs
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\DeleteStatus.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\bin\Debug\netcoreapp3.1\wwwroot\Reports\PendingOrders.rdlc
+F:\dotnet\AutomotiveSols\AutomotiveSols\bin\Debug\netcoreapp3.1\wwwroot\Reports\ApprovedOrders.rdlc
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\QR\Index.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\QR\Create.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\QR\Edit.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\QRAd.cshtml.g.cs

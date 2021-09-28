@@ -104,7 +104,7 @@ namespace AutomotiveSols.Controllers
 
         //        };
 
-                
+
         //        var applicationUser = await _userManager.GetUserAsync(User);
         //        if (applicationUser != null)
         //        {
@@ -166,11 +166,11 @@ namespace AutomotiveSols.Controllers
 
         //        return View(IndexVM);
         //    }
-            
+
 
         //}
         [HttpGet]
-        public async Task<ActionResult> Index(string searchName = null, string searchCategory = null, string searchPrice = null, string searchPrice2 = null)
+        public async Task<ActionResult> Index(string searchName = null, string searchCategory = null)
         {
             ViewBag.BrandList = new SelectList(_db.Brands.ToList(), "Id", "Name");
             ViewBag.ModelList = new SelectList(_db.Models.ToList(), "Id", "Name");
@@ -183,62 +183,62 @@ namespace AutomotiveSols.Controllers
             var features = _db.Features.ToList();
 
 
-           
-                IndexVM = new IndexViewModel()
+
+            IndexVM = new IndexViewModel()
+            {
+                TotalCars = _db.Cars.Count(x => x.Status == true),
+                //TotalCars = 10,
+                TotalServices = _db.Services.ToList().Count(x => x.Status == true),
+
+                TotalSpareParts = _db.AutoParts.Count(x => x.Status == true),
+
+                TotalUsers = _db.ApplicationUsers.Count(x => x.LockoutEnabled == true),
+
+                CategoryList = await _db.Categories.ToListAsync(),
+                AutoPartList = await _db.AutoParts.Include(x => x.ApplicationUser).Include(x => x.Category)
+                                .Include(x => x.SubCategory)
+                                .Include(x => x.PartGalleries)
+
+                                .ToListAsync(),
+                ServiceTypes = await _db.ServiceTypes.ToListAsync(),
+                Services = await _db.Services.Include(x => x.ApplicationUser)
+                                .Include(x => x.ServiceType)
+
+                                .ToListAsync(),
+                Brands = await _db.Brands.ToListAsync(),
+
+                Cars = await _db.Cars.Include(x => x.ApplicationUser)
+                                .Include(x => x.Brand)
+                                .Include(x => x.Model)
+                                .Include(x => x.Mileage)
+                                .Include(x => x.Transmission)
+                                .Include(x => x.Trim)
+                                .Include(x => x.RegistrationCity)
+                                .Include(x => x.Year)
+
+                                .ToListAsync(),
+
+                FeatureAssignedToCar = features.Select(s => new FeatureAssignedToCar()
                 {
-                    TotalCars = _db.Cars.Count(x => x.Status == true),
-                    //TotalCars = 10,
-                    TotalServices = _db.Services.ToList().Count(x => x.Status == true),
-
-                    TotalSpareParts = _db.AutoParts.Count(x => x.Status == true),
-
-                    TotalUsers = _db.ApplicationUsers.Count(x => x.LockoutEnabled == true),
-
-                    CategoryList = await _db.Categories.ToListAsync(),
-                    AutoPartList = await _db.AutoParts.Include(x => x.ApplicationUser).Include(x => x.Category)
-                                    .Include(x => x.SubCategory)
-                                    .Include(x => x.PartGalleries)
-                                   
-                                    .ToListAsync(),
-                    ServiceTypes = await _db.ServiceTypes.ToListAsync(),
-                    Services = await _db.Services.Include(x => x.ApplicationUser)
-                                    .Include(x => x.ServiceType)
-                                    
-                                    .ToListAsync(),
-                    Brands = await _db.Brands.ToListAsync(),
-
-                    Cars = await _db.Cars.Include(x => x.ApplicationUser)
-                                    .Include(x => x.Brand)
-                                    .Include(x => x.Model)
-                                    .Include(x => x.Mileage)
-                                    .Include(x => x.Transmission)
-                                    .Include(x => x.Trim)
-                                    .Include(x => x.RegistrationCity)
-                                    .Include(x => x.Year)
-                                    
-                                    .ToListAsync(),
-
-                    FeatureAssignedToCar = features.Select(s => new FeatureAssignedToCar()
-                    {
-                        FeatureId = s.Id,
-                        FeatureName = s.Name,
-                        Assigned = false
-                    }).ToList()
+                    FeatureId = s.Id,
+                    FeatureName = s.Name,
+                    Assigned = false
+                }).ToList()
 
 
 
 
-                };
+            };
 
 
-                var applicationUser = await _userManager.GetUserAsync(User);
-                if (applicationUser != null)
-                {
-                    var count = _db.ShoppingCarts.Where(x => x.ApplicationUserId == applicationUser.Id).ToList().Count();
-                    HttpContext.Session.SetInt32(StaticDetails.ssShoppingCart, count);
-                }
+            var applicationUser = await _userManager.GetUserAsync(User);
+            if (applicationUser != null)
+            {
+                var count = _db.ShoppingCarts.Where(x => x.ApplicationUserId == applicationUser.Id).ToList().Count();
+                HttpContext.Session.SetInt32(StaticDetails.ssShoppingCart, count);
+            }
 
-                if(searchCategory != null)
+            if (searchCategory != null)
             {
                 IndexVM = new IndexViewModel()
                 {
@@ -250,18 +250,18 @@ namespace AutomotiveSols.Controllers
 
                     TotalUsers = _db.ApplicationUsers.Count(x => x.LockoutEnabled == true),
 
-                    CategoryList = await _db.Categories.Where(x=>x.Name.Contains(searchCategory)).ToListAsync(),
+                    CategoryList = await _db.Categories.Where(x => x.Name.Contains(searchCategory)).ToListAsync(),
                     AutoPartList = await _db.AutoParts.Include(x => x.ApplicationUser).Include(x => x.Category)
                                     .Include(x => x.SubCategory)
                                     .Include(x => x.PartGalleries)
                                     .Where(x => x.Category.Name.Contains(searchCategory) || x.Description.Contains(searchCategory))
                                     .ToListAsync(),
-                    ServiceTypes = await _db.ServiceTypes.Where(x=>x.Name.Contains(searchCategory)).ToListAsync(),
+                    ServiceTypes = await _db.ServiceTypes.Where(x => x.Name.Contains(searchCategory)).ToListAsync(),
                     Services = await _db.Services.Include(x => x.ApplicationUser)
                                     .Include(x => x.ServiceType)
                                     .Where(x => x.ServiceType.Name.Contains(searchCategory) || x.Description.Contains(searchName))
                                     .ToListAsync(),
-                    Brands = await _db.Brands.Where(x=>x.Name.Contains(searchCategory)).ToListAsync(),
+                    Brands = await _db.Brands.Where(x => x.Name.Contains(searchCategory)).ToListAsync(),
 
                     Cars = await _db.Cars.Include(x => x.ApplicationUser)
                                     .Include(x => x.Brand)
@@ -271,7 +271,7 @@ namespace AutomotiveSols.Controllers
                                     .Include(x => x.Trim)
                                     .Include(x => x.RegistrationCity)
                                     .Include(x => x.Year)
-                                    .Where(x => x.Brand.Name.Contains(searchCategory) 
+                                    .Where(x => x.Brand.Name.Contains(searchCategory)
                                     || x.RegistrationCity.Name.Contains(searchCategory) || x.Transmission.Name.Contains(searchCategory)
                                     || x.Trim.Name.Contains(searchCategory) || x.Year.SolarYear.Contains(searchCategory))
                                     .ToListAsync(),
@@ -289,7 +289,7 @@ namespace AutomotiveSols.Controllers
                 };
 
             }
-                if(searchName != null)
+            if (searchName != null)
             {
                 IndexVM = new IndexViewModel()
                 {
@@ -388,7 +388,7 @@ namespace AutomotiveSols.Controllers
 
             //    };
             //}
-           
+
             return View(IndexVM);
 
 
@@ -408,10 +408,6 @@ namespace AutomotiveSols.Controllers
 
             if(decisionVM.SaleOwn== true)
             {
-                return RedirectToAction(nameof(UserAd));
-            }
-            else
-            {
                 Random r = new Random();
                 int num = r.Next();
                 HttpContext.Session.SetInt32(StaticDetails.Code, num);
@@ -421,7 +417,25 @@ namespace AutomotiveSols.Controllers
 
                 return RedirectToAction(nameof(Verify));
             }
+            else
+            {
+
+                return RedirectToAction(nameof(QRAd));
+            }
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> QRAd()
+        {
+           var qr =   _db.QRs.OrderByDescending(x=>x.Id)
+                .Take(1)
+                .ToList()
+                .FirstOrDefault();
+
+            return View(qr);
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult>   Verify()

@@ -109,6 +109,45 @@ namespace AutomotiveSols.Areas.Admin.Controllers
            
         }
 
+        public IActionResult OrdersPending()
+        {
+            var dt = new DataTable();
+            dt = orderService.GetOrdersPending();
+
+            string mimtype = "";
+            int extension = 1;
+            var path = $"{this._webHostEnvironment.WebRootPath}\\Reports\\PendingOrders.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("PendingOrders", dt);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+            return File(result.MainStream, "application/pdf");
+
+
+
+        }
+        public IActionResult OrdersApproved()
+        {
+            var dt = new DataTable();
+            dt = orderService.GetOrdersApproved();
+
+            string mimtype = "";
+            int extension = 1;
+            var path = $"{this._webHostEnvironment.WebRootPath}\\Reports\\ApprovedOrders.rdlc";
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+
+            LocalReport localReport = new LocalReport(path);
+            localReport.AddDataSource("ApprovedOrders", dt);
+            var result = localReport.Execute(RenderType.Pdf, extension, parameters, mimtype);
+            return File(result.MainStream, "application/pdf");
+
+
+
+        }
+
         public IActionResult Invoice(int id)
         {
             OrderVM OrderVM = new OrderVM()

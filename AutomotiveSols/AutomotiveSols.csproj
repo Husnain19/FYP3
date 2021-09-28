@@ -47,6 +47,7 @@
     <Folder Include="wwwroot\cars\gallery\" />
     <Folder Include="wwwroot\cars\cover\" />
     <Folder Include="wwwroot\images\car\" />
+    <Folder Include="wwwroot\images\QR\" />
     <Folder Include="wwwroot\images\part\" />
     <Folder Include="wwwroot\parts\cover\" />
     <Folder Include="wwwroot\parts\gallery\" />
@@ -54,14 +55,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Source\ApprovedOrders.Designer.cs">
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Source\DataSet2.Designer.cs">
       <DependentUpon>DataSet2.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Source\PendingOrders.Designer.cs">
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\Reports\ApprovedOrders.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Reports\PendingOrders.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Reports\Report2.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -71,6 +88,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Source\ApprovedOrders.xsc">
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+    </None>
+    <None Update="Source\ApprovedOrders.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>ApprovedOrders.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="Source\ApprovedOrders.xss">
+      <DependentUpon>ApprovedOrders.xsd</DependentUpon>
+    </None>
     <None Update="Source\DataSet2.xsc">
       <DependentUpon>DataSet2.xsd</DependentUpon>
     </None>
@@ -81,6 +109,17 @@
     </None>
     <None Update="Source\DataSet2.xss">
       <DependentUpon>DataSet2.xsd</DependentUpon>
+    </None>
+    <None Update="Source\PendingOrders.xsc">
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
+    </None>
+    <None Update="Source\PendingOrders.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>PendingOrders.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="Source\PendingOrders.xss">
+      <DependentUpon>PendingOrders.xsd</DependentUpon>
     </None>
   </ItemGroup>
 

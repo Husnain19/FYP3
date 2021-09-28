@@ -78,23 +78,21 @@
 
             </div>
             @*<div class="row" style="padding-top:10px;">
-                <div class="col-2">
-                    Lower Price
-                </div>
-                <div class="col-3">
-                    @Html.Editor("searchPrice", new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-                <div class="col-2">
-
-                </div>
-                <div class="col-2">
-                    Higher Price
-                </div>
-                <div class="col-3">
-                    @Html.Editor("searchPrice2", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
-                </div>
-
-            </div>*@
+                    <div class="col-2">
+                        Lower Price
+                    </div>
+                    <div class="col-3">
+                        @Html.Editor("searchPrice", new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="col-2">
+                        Higher Price
+                    </div>
+                    <div class="col-3">
+                        @Html.Editor("searchPrice2", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                    </div>
+                </div>*@
             <div class="row" style="padding-top:10px;">
                 <div class="col-2">
                 </div>
@@ -126,11 +124,9 @@
     <!--<div style="position:relative">
         <div style="position:relative;left:46%; top:10% ">
             <form method="get" asp-controller="Home" asp-action="Index" class="example">
-
                 <input type="text" placeholder="Search.." value="@ViewData["searchString"]"
                        name="searchString" style="width:50% " ; />
                 <button type="submit" value="Search" class="btn btn-primary"><i class="fa fa-search"></i></button>
-
             </form>
         </div>-->
     <!---------------------------------------------------------------------------->
@@ -146,7 +142,8 @@
                 <h3> Workshop Services</h3>
                 @foreach (var item in Model.ServiceTypes)
                 {
-    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+                    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>
+}
 
                 <br />
                 <br />
@@ -154,14 +151,16 @@
                 <h3 style="align-content:baseline"> Spare Parts</h3>
                 @foreach (var item in Model.CategoryList)
                 {
-    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+                    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>
+}
                 <br />
                 <br />
 
                 <h3> Cars</h3>
                 @foreach (var item in Model.Brands)
                 {
-    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>}
+                    <li class="ml-1 mr-1" style="display:inline;" data-filter=".@item.Name.Replace(" ",string.Empty)">@item.Name</li>
+}
             </ul>
             <br /><br />
             <div class="row" style="position:relative; top:10%;">
@@ -217,9 +216,9 @@
             <br /><br />
             @foreach (var category in Model.ServiceTypes)
             {
-<div class="row" id="menu-wrapper">
-    <partial name="_ThumbnailAreaPartial" model="@Model.Services.Where(u=>u.ServiceType.Name.Equals(category.Name))" />
-</div>}
+                <div class="row" id="menu-wrapper">
+                    <partial name="_ThumbnailAreaPartial" model="@Model.Services.Where(u=>u.ServiceType.Name.Equals(category.Name))" />
+                </div>}
         </div>
     </div>
 
@@ -241,9 +240,9 @@
 
             @foreach (var category in Model.CategoryList)
             {
-<div class="row" id="menu-wrapper">
-    <partial name="_ThumbnailAreaPartialParts" model="@Model.AutoPartList.Where(u=>u.Category.Name.Equals(category.Name))" />
-</div>  }
+                <div class="row" id="menu-wrapper">
+                    <partial name="_ThumbnailAreaPartialParts" model="@Model.AutoPartList.Where(u=>u.Category.Name.Equals(category.Name))" />
+                </div>      }
         </div>
     </div>
 
@@ -253,40 +252,40 @@
     <div style="position:relative; top:10%;">
         @foreach (var brand in Model.Brands.OrderBy(o => o.Name))
         {
-@if (Model.Cars.Where(c => c.BranId == brand.Id).Count() > 0)
-{
-<div class="row container pb-3 backgroundWhite">
-    <div class="col-12">
-        <div class="row">
-            <h4 class="text-dark"><b>@brand.Name</b></h4>
+            @if (Model.Cars.Where(c => c.BranId == brand.Id).Count() > 0)
+            {
+                <div class="row container pb-3 backgroundWhite">
+                    <div class="col-12">
+                        <div class="row">
+                            <h4 class="text-dark"><b>@brand.Name</b></h4>
 
-            <div class="col-12">
-                <div class="row my-3">
-                    @foreach (var part in Model.Cars.Where(c => c.BranId == brand.Id))
-                    {
-<div class="col-lg-4 col-xl-3 col-md-6 pb-4">
-    <div class="card" style="border:2px solid black;border-radius:5px; background:url('/images/leaves.png')">
-        <div class="pl-3 pt-1 text-center">
-            <h3 class="card-title text-dark"><b>@part.Trim.Name</b></h3>
-        </div>
-        <div class="d-flex justify-content-between ">
-            <div class="pl-1 text-muted">Price </div>
-            <div class="pr-1 text-danger h5">$@part.Price</div>
-        </div>
-        <img src="@part.MainImage" class="card-img-top p-2 rounded" />
+                            <div class="col-12">
+                                <div class="row my-3">
+                                    @foreach (var part in Model.Cars.Where(c => c.BranId == brand.Id))
+                                    {
+                                        <div class="col-lg-4 col-xl-3 col-md-6 pb-4">
+                                            <div class="card" style="border:2px solid black;border-radius:5px; background:url('/images/leaves.png')">
+                                                <div class="pl-3 pt-1 text-center">
+                                                    <h3 class="card-title text-dark"><b>@part.Trim.Name</b></h3>
+                                                </div>
+                                                <div class="d-flex justify-content-between ">
+                                                    <div class="pl-1 text-muted">Price </div>
+                                                    <div class="pr-1 text-danger h5">$@part.Price</div>
+                                                </div>
+                                                <img src="@part.MainImage" class="card-img-top p-2 rounded" />
 
-        <div class="text-muted text-center pb-2">@part.Year.SolarYear</div>
-        <div class="text-muted text-center pb-2">@part.RegistrationCity.Name</div>
-        <div class="text-muted text-center pb-2">@part.ApplicationUser.Name</div>
+                                                <div class="text-muted text-center pb-2">@part.Year.SolarYear</div>
+                                                <div class="text-muted text-center pb-2">@part.RegistrationCity.Name</div>
+                                                <div class="text-muted text-center pb-2">@part.ApplicationUser.Name</div>
 
-        <a asp-action="DetailsCar" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@part.Id">Details</a>
-    </div>
-</div>}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>}}
+                                                <a asp-action="DetailsCar" class="btn btn-dark" style="border-radius:2px;" asp-route-id="@part.Id">Details</a>
+                                            </div>
+                                        </div>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}}
     </div>
 </form>
 @section Scripts{
@@ -296,37 +295,23 @@
 
     <script>
         var posts = $('.post');
-
         (function ($) {
-
             $("#menu-filters li").click(function () {
                 $("#menu-filters li").removeClass('active btn btn-secondary');
                 $(this).addClass('active btn btn-secondary');
-
                 var selectedFilter = $(this).data("filter");
-
                 $(".menu-restaurant").fadeOut();
-
                 setTimeout(function () {
                     $(selectedFilter).slideDown();
                 }, 300);
             });
-
-
-
         })(jQuery);
-
-
-
         var SaleUs = document.getElementById('DecisionVM_SaleUs');
         var SaleOwn = document.getElementById('DecisionVM_SaleOwn');
-
         document.getElementById("SaleOwnBtn").style.display = "none";
         document.getElementById("SaleUsBtn").style.display = "none";
-
         var SaleOwnBtn = document.getElementById("SaleOwnBtn");
         var SaleUsBtn = document.getElementById("SaleUsBtn");
-
         // when unchecked or checked, run the function
         //checker.onchange = function () {
         //    if (this.checked) {
@@ -334,7 +319,6 @@
         //    } else {
         //        sendbtn.disabled = true;
         //    }
-
         //}
         SaleOwn.onchange = function () {
             if (this.checked) {
@@ -343,19 +327,15 @@
                 SaleUsBtn.style.display = "none";
             } else {
                 SaleOwnBtn.style.display = "none";
-
             }
         }
-
         SaleUs.onchange = function () {
             if (this.checked) {
                 SaleOwn.checked = false;
                 SaleUsBtn.style.display = "block";
                 SaleOwnBtn.style.display = "none";
-
             } else {
                 SaleUsBtn.style.display = "none";
-
             }
         }
     </script>

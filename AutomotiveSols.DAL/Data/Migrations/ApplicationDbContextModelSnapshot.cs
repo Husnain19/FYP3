@@ -190,6 +190,9 @@ namespace AutomotiveSols.Data.Migrations
                     b.Property<int>("YearId")
                         .HasColumnType("int");
 
+                    b.Property<bool?>("isVerified")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -512,6 +515,47 @@ namespace AutomotiveSols.Data.Migrations
                     b.HasIndex("AutoPartId");
 
                     b.ToTable("PartGalleries");
+                });
+
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.QR", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QRCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("price")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QRs");
                 });
 
             modelBuilder.Entity("AutomotiveSols.BLL.Models.RegistrationCity", b =>
@@ -1150,6 +1194,14 @@ namespace AutomotiveSols.Data.Migrations
                         .HasForeignKey("AutoPartId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AutomotiveSols.BLL.Models.Payment", b =>
+                {
+                    b.HasOne("AutomotiveSols.BLL.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("AutomotiveSols.BLL.Models.Services", b =>

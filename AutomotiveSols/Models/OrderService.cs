@@ -24,5 +24,37 @@ namespace AutomotiveSols.Models
             }
             return dt;
         }
+
+        public DataTable GetOrdersPending()
+        {
+            var dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SPGetOrdersPending", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            return dt;
+        }
+
+        public DataTable GetOrdersApproved()
+        {
+            var dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("SPGetOrdersApproved", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                con.Close();
+            }
+            return dt;
+        }
+
+        
     }
 }
