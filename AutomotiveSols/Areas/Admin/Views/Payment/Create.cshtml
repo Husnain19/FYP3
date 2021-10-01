@@ -1,0 +1,48 @@
+﻿@model AutomotiveSols.BLL.Models.Payment
+
+@{
+    ViewData["Title"] = "Upload your Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (ViewBag.IsSuccess == true)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Congratulations</strong> Your receipt is send to our team. They will verify and after that you can post the featured ad. <br />
+       
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<section id="cover">
+    <div id="cover-caption">
+        <div id="container" class="container">
+            <div class="row">
+                <div class="col-sm-10 offset-sm-1 text-center">
+                    <h1 class="display-3">Welcome to Automotive Solutions Cars Ads</h1>
+                    <form class="form-inline justify-content-center" enctype="multipart/form-data" method="post" asp-area="Admin" asp-controller="Payment" asp-action="Create">
+
+                        <div class="form-group">
+                            <label class="sr-only">Upload your Payment Invoice</label>
+                            @*<img height="400" width="400" src="@Model.QRCode" style="border:1px solid black;" />*@
+                            <div class="col-2">
+                                <label asp-for="PaymentImage"></label>
+                            </div>
+                            <div class="col-5">
+                                <input type="file" name="files" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="info-form">
+
+                            <button type="submit" class="btn btn-success ">Upload!</button>
+                        </div>
+                    </form>
+                </div>
+                <br>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

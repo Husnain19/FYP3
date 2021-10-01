@@ -633,3 +633,6 @@ F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admi
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\QR\Create.cshtml.g.cs
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\QR\Edit.cshtml.g.cs
 F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\QRAd.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Payment\Create.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Car\Request.cshtml.g.cs
+F:\dotnet\AutomotiveSols\AutomotiveSols\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\UserAdFeature.cshtml.g.cs

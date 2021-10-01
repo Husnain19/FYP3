@@ -36,6 +36,7 @@ namespace AutomotiveSols.BLL.Models
         public int TrimId { get; set; }
         public Trim Trim { get; set; }
         public bool? isVerified { get; set; }
+        public bool? isFeatured { get; set; }
         public int YearId { get; set; }
         public Year Year { get; set; }
         public int? ShowroomId { get; set; }

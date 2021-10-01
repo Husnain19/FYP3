@@ -47,6 +47,7 @@
     <Folder Include="wwwroot\cars\gallery\" />
     <Folder Include="wwwroot\cars\cover\" />
     <Folder Include="wwwroot\images\car\" />
+    <Folder Include="wwwroot\images\Payment\" />
     <Folder Include="wwwroot\images\QR\" />
     <Folder Include="wwwroot\images\part\" />
     <Folder Include="wwwroot\parts\cover\" />

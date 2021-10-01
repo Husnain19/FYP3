@@ -17,7 +17,7 @@
                         <img height="400" width="400" src="@Model.QRCode" style="border:1px solid black;"/>
                     </div>
                     <div class="info-form">
-                        <form class="form-inline justify-content-center" method="post" asp-area="Customer" asp-controller="Home" asp-action="Verify">
+                        <form class="form-inline justify-content-center" method="get" asp-area="Admin" asp-controller="Payment" asp-action="Create">
 
                             <button type="submit" class="btn btn-success ">Continue!</button>
                         </form>

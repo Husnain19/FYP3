@@ -9,6 +9,7 @@ namespace AutomotiveSols.Static
     {
         public const string ImageFolder = @"images\ServicesImage";
         public const string ImageFolderQR = @"images\QR";
+        public const string ImageFolderPayment = @"images\Payment";
 
         public const string partsimage = @"images\part";
         public const string carimage = @"images\car";

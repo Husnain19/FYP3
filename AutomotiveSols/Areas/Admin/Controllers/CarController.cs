@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutomotiveSols.BLL.Models;
 using AutomotiveSols.BLL.ViewModels;
 using AutomotiveSols.Data;
+using AutomotiveSols.EmailServices;
 using AutomotiveSols.Static;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,13 +24,15 @@ namespace AutomotiveSols.Areas.Admin.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        private readonly IEmailSender _emailSender;
         public CarController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment,
-             UserManager<ApplicationUser> userManager)
+             UserManager<ApplicationUser> userManager,
+            IEmailSender emailSender)
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -547,6 +550,55 @@ namespace AutomotiveSols.Areas.Admin.Controllers
             return "/" + folderPath;
         }
 
+        public IActionResult Request(bool isSuccess = false ,bool isReject = false)
+        {
+           var payments =  _db.Payments.Include(x=>x.Car)
+                                       .Include(x=>x.ApplicationUser)
+                                       .ToList();
+            ViewBag.isSuccess = false;
+            ViewBag.isReject = false;
+            return View(payments);
+        }
 
+        public async Task<IActionResult> Approve(int id)
+        {
+            var applicationUser = await _userManager.GetUserAsync(User);
+            var payment =    _db.Payments.Where(x => x.Id == id).FirstOrDefault();
+            payment.Status = true;
+
+
+            _db.Update(payment);
+            _db.SaveChanges();
+            string email = _db.ApplicationUsers.Where(x => x.Id == payment.ApplicationUserId).Select(x => x.Email).FirstOrDefault();
+            string name = _db.ApplicationUsers.Where(x => x.Id == payment.ApplicationUserId).Select(x => x.Name).FirstOrDefault();
+
+            await _emailSender.SendEmailAsync(email, "Your invoice is verified",
+                      $"Mr/Miss '{name}'.Please your ad by clicking this link: <a href='https://localhost:44363/Customer/Home/UserAdFeature'>link</a>");
+
+            return RedirectToAction(nameof(Request), new
+            {
+                isSuccess = true , isRject = false
+            });
+        }
+
+        public async Task<IActionResult> Reject(int id)
+        {
+            var applicationUser = await _userManager.GetUserAsync(User);
+            var payment = _db.Payments.Where(x => x.Id == id).FirstOrDefault();
+            payment.Status = false;
+            _db.Update(payment);
+            _db.SaveChanges();
+            string email = _db.ApplicationUsers.Where(x => x.Id == payment.ApplicationUserId).Select(x => x.Email).FirstOrDefault();
+            string name = _db.ApplicationUsers.Where(x => x.Id == payment.ApplicationUserId).Select(x => x.Name).FirstOrDefault();
+            await _emailSender.SendEmailAsync(email, "Your invoice is  verified",
+                      $"Mr/Miss '{name}'. Please upload the valid payment invoice");
+
+
+            return RedirectToAction(nameof(Request), new
+            {
+                isSuccess = false,
+                isReject = true
+            });
+        }
     }
 }
